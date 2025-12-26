@@ -6,6 +6,7 @@ export interface CoinPackage {
   amount: number;
   image: string;
   featured?: boolean;
+  discount?: boolean;
 }
 
 export interface Account {
@@ -19,6 +20,7 @@ export interface Account {
   players: number;
   image: string;
   featured?: boolean;
+  discount?: boolean;
 }
 
 export interface Team {
@@ -31,6 +33,7 @@ export interface Team {
   players: string[];
   image: string;
   featured?: boolean;
+  discount?: boolean;
 }
 
 export interface Order {
@@ -57,4 +60,4 @@ export interface User {
   name?: string;
 }
 
-export type TabType = 'coins' | 'teams';
+export type TabType = 'coins' | 'Accounts';

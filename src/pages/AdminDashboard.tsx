@@ -15,11 +15,11 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { coinPackages, accounts, teams, sampleOrders } from '@/data/mockData';
+import { coinPackages, Accounts, sampleOrders } from '@/data/mockData';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
-type AdminTab = 'dashboard' | 'coins' | 'accounts' | 'teams' | 'orders';
+type AdminTab = 'dashboard' | 'coins' | 'accounts' | 'Accounts' | 'orders';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -47,14 +47,14 @@ export default function AdminDashboard() {
     { id: 'dashboard' as AdminTab, label: 'Dashboard', icon: LayoutDashboard },
     { id: 'coins' as AdminTab, label: 'Coins', icon: Coins },
     { id: 'accounts' as AdminTab, label: 'Accounts', icon: UserCircle },
-    { id: 'teams' as AdminTab, label: 'Teams', icon: Users },
+    { id: 'Accounts' as AdminTab, label: 'Accounts', icon: Users },
     { id: 'orders' as AdminTab, label: 'Orders', icon: ShoppingCart },
   ];
 
   const stats = [
     { label: 'Total Coins Packages', value: coinPackages.length, color: 'text-secondary' },
-    { label: 'Total Accounts', value: accounts.length, color: 'text-accent' },
-    { label: 'Total Teams', value: teams.length, color: 'text-primary' },
+    { label: 'Total Accounts', value: Accounts.length, color: 'text-accent' },
+    { label: 'Total Accounts', value: Accounts.length, color: 'text-primary' },
     { label: 'Pending Orders', value: sampleOrders.filter(o => o.status === 'pending').length, color: 'text-destructive' },
   ];
 
@@ -178,7 +178,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {(activeTab === 'coins' || activeTab === 'accounts' || activeTab === 'teams') && (
+        {(activeTab === 'coins' || activeTab === 'accounts' || activeTab === 'Accounts') && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="font-display text-2xl font-bold text-foreground capitalize">{activeTab}</h2>
@@ -199,7 +199,7 @@ export default function AdminDashboard() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {(activeTab === 'coins' ? coinPackages : activeTab === 'accounts' ? accounts : teams)
+              {(activeTab === 'coins' ? coinPackages : activeTab === 'accounts' ? Accounts : Accounts)
                 .filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
                 .map(item => (
                   <div key={item.id} className="glass-card p-4">

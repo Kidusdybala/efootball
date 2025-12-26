@@ -1,6 +1,7 @@
 import { Star, Coins, TrendingUp } from 'lucide-react';
 import { CoinPackage, Account, Team } from '@/types';
 import { cn } from '@/lib/utils';
+import discountImage from '@/assets/discount.png';
 
 interface ItemCardProps {
   item: CoinPackage | Account | Team;
@@ -23,9 +24,10 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
         item.featured && "ring-1 ring-secondary/50"
       )}
     >
-      {item.featured && (
-        <div className="absolute top-1 right-1 z-10 bg-gradient-gold text-primary-foreground text-xs font-bold px-2 py-1 rounded-full">
-          HOT
+      {item.discount && (
+        <div className="absolute top-1 right-1 z-10 flex flex-col items-center">
+          <img src={discountImage} alt="Discount" className="w-8 h-8" />
+          <span className="text-xs font-bold text-white bg-red-600 px-1 py-0.5 rounded">50% OFF</span>
         </div>
       )}
       

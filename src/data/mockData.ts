@@ -9,6 +9,12 @@ import team3 from '@/assets/teams/3d0fac9139511c599579d12daeffdf85.jpg';
 import team4 from '@/assets/teams/4d16b11b664be199dc41acc9ee2d9c79.jpg';
 import team5 from '@/assets/teams/83b2288ce46adf26ccded8a2677ce6d1.jpg';
 import team6 from '@/assets/teams/e31b1b057ca3b49857a23114ac0e5e71.jpg';
+import telebirrImage from '@/assets/Telebirr.png';
+import cbeImage from '@/assets/CBE birr.jpg';
+import dashenImage from '@/assets/Dashen_Bank.png';
+import abysinniaImage from '@/assets/abysinnia.jpg';
+import bunaImage from '@/assets/buna.png';
+import commercialImage from '@/assets/commercial-bank-of-ethiopia-logo-png_seeklogo-547506.png';
 
 export const coinPackages: CoinPackage[] = [
   {
@@ -35,7 +41,7 @@ export const coinPackages: CoinPackage[] = [
     price: 480,
     amount: 500,
     image: coin3,
-    featured: true,
+    discount: true,
   },
   {
     id: '4',
@@ -52,7 +58,7 @@ export const coinPackages: CoinPackage[] = [
     price: 750,
     amount: 1000,
     image: coin2,
-    featured: true,
+    discount: true,
   },
   {
     id: '6',
@@ -64,7 +70,7 @@ export const coinPackages: CoinPackage[] = [
   },
 ];
 
-export const accounts: Account[] = [
+export const Accounts: Account[] = [
   {
     id: '1',
     title: 'Pro Account Lv.50',
@@ -74,8 +80,8 @@ export const accounts: Account[] = [
     level: 50,
     coins: 2000000,
     players: 45,
-    image: accountImage,
-    featured: true,
+    image: team1,
+    discount: true,
   },
   {
     id: '2',
@@ -86,7 +92,7 @@ export const accounts: Account[] = [
     level: 20,
     coins: 500000,
     players: 25,
-    image: accountImage,
+    image: team2,
   },
   {
     id: '3',
@@ -97,8 +103,8 @@ export const accounts: Account[] = [
     level: 80,
     coins: 5000000,
     players: 60,
-    image: accountImage,
-    featured: true,
+    image: team3,
+    discount: true,
   },
   {
     id: '4',
@@ -109,7 +115,7 @@ export const accounts: Account[] = [
     level: 35,
     coins: 1000000,
     players: 35,
-    image: accountImage,
+    image: team4,
   },
 ];
 
@@ -123,7 +129,7 @@ export const teams: Team[] = [
     rating: 90,
     players: ['Player1', 'Player2', 'Player3', 'Player4'],
     image: team1,
-    featured: true,
+    discount: true,
   },
   {
     id: '2',
@@ -144,7 +150,7 @@ export const teams: Team[] = [
     rating: 92,
     players: ['Player9', 'Player10', 'Player11', 'Player12'],
     image: team3,
-    featured: true,
+    discount: true,
   },
   {
     id: '4',
@@ -175,7 +181,7 @@ export const teams: Team[] = [
     rating: 95,
     players: ['Player21', 'Player22', 'Player23', 'Player24'],
     image: team6,
-    featured: true,
+    discount: true,
   },
 ];
 
@@ -210,9 +216,53 @@ export const sampleOrders: Order[] = [
   },
 ];
 
-export const bankDetails = {
-  bankName: 'Your Bank Name',
-  accountName: 'AURA SHOP',
-  accountNumber: '1234567890',
-  routingNumber: '987654321',
-};
+export const banks = [
+  {
+    id: '1',
+    bankName: 'TeleBirr',
+    accountName: 'AURA SHOP',
+    accountNumber: '1234567890',
+    routingNumber: '987654321',
+    image: telebirrImage,
+  },
+  {
+    id: '2',
+    bankName: 'CBE',
+    accountName: 'AURA SHOP',
+    accountNumber: '0987654321',
+    routingNumber: '123456789',
+    image: cbeImage,
+  },
+  {
+    id: '3',
+    bankName: 'Dashen Bank',
+    accountName: 'AURA SHOP',
+    accountNumber: '1122334455',
+    routingNumber: '554433221',
+    image: dashenImage,
+  },
+  {
+    id: '4',
+    bankName: 'Abysinnia Bank',
+    accountName: 'AURA SHOP',
+    accountNumber: '2233445566',
+    routingNumber: '665544332',
+    image: abysinniaImage,
+  },
+  {
+    id: '5',
+    bankName: 'Buna Bank',
+    accountName: 'AURA SHOP',
+    accountNumber: '3344556677',
+    routingNumber: '776655443',
+    image: bunaImage,
+  },
+  {
+    id: '6',
+    bankName: 'CBE',
+    accountName: 'AURA SHOP',
+    accountNumber: '4455667788',
+    routingNumber: '887766554',
+    image: commercialImage,
+  },
+];

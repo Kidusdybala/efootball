@@ -3,15 +3,15 @@ import { Header } from '@/components/Header';
 import { BottomNav } from '@/components/BottomNav';
 import { ItemCard } from '@/components/ItemCard';
 import { OrderModal } from '@/components/OrderModal';
-import { coinPackages, teams } from '@/data/mockData';
-import { TabType, CoinPackage, Team } from '@/types';
+import { coinPackages, Accounts } from '@/data/mockData';
+import { TabType, CoinPackage, Account, Team } from '@/types';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<TabType>('coins');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<{
-    item: CoinPackage | Team;
-    type: 'coin' | 'team';
+    item: CoinPackage | Account | Team;
+    type: 'coin' | 'account' | 'team';
   } | null>(null);
 
   const filteredItems = useMemo(() => {
@@ -23,8 +23,8 @@ const Index = () => {
           item.title.toLowerCase().includes(query) ||
           item.description.toLowerCase().includes(query)
         );
-      case 'teams':
-        return teams.filter(item => 
+      case 'Accounts':
+        return Accounts.filter(item => 
           item.title.toLowerCase().includes(query) ||
           item.description.toLowerCase().includes(query)
         );
@@ -33,10 +33,10 @@ const Index = () => {
     }
   }, [activeTab, searchQuery]);
 
-  const getItemType = (): 'coin' | 'team' => {
+  const getItemType = (): 'coin' | 'account' => {
     switch (activeTab) {
       case 'coins': return 'coin';
-      case 'teams': return 'team';
+      case 'Accounts': return 'account';
     }
   };
 
@@ -79,7 +79,7 @@ const Index = () => {
         )}
 
         {/* All Items Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredItems.map((item, index) => (
             <div 
               key={item.id}
