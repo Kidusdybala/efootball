@@ -191,18 +191,18 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
                         key={bank.id}
                         type="button"
                         onClick={() => setFormData({ ...formData, selectedBank: bank.id })}
-                        className={`p-3 border rounded-lg transition-colors ${
+                        className={`flex flex-col items-center p-2 border rounded-lg transition-all duration-200 ${
                           formData.selectedBank === bank.id
-                            ? 'border-primary bg-primary/10'
-                            : 'border-border bg-white hover:bg-gray-50'
+                            ? 'border-2 border-primary bg-green-50'
+                            : 'border-border bg-white hover:bg-gray-50 hover:shadow-sm'
                         }`}
                       >
                         <img
                           src={bank.image}
                           alt={bank.bankName}
-                          className="w-12 h-12 mx-auto mb-2 object-contain transition-transform hover:scale-110"
+                          className="w-10 h-10 mb-1 object-contain"
                         />
-                        <span className="text-sm font-medium text-black">{bank.bankName}</span>
+                        <span className="text-sm font-medium text-gray-900 text-center">{bank.bankName}</span>
                       </button>
                     ))}
                   </div>
@@ -255,32 +255,28 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
             <div className="glass-card p-4 mb-6 space-y-3">
               <h4 className="font-display font-semibold text-foreground mb-3">Payment Details</h4>
 
-              {selectedBank && (
-                <>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Bank</span>
-                    <span className="text-foreground font-medium">{selectedBank.bankName}</span>
-                  </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Bank</span>
+                <span className="text-foreground font-medium">Mock Bank</span>
+              </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Account Name</span>
-                    <span className="text-foreground font-medium">{selectedBank.accountName}</span>
-                  </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Account Name</span>
+                <span className="text-foreground font-medium">Yakob Abdella</span>
+              </div>
 
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Account Number</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-foreground font-bold">{selectedBank.accountNumber}</span>
-                      <button
-                        onClick={() => copyToClipboard(selectedBank.accountNumber)}
-                        className="p-1 rounded bg-muted hover:bg-muted/80 transition-colors"
-                      >
-                        {copied ? <Check className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Account Number</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-foreground font-bold">100029929292</span>
+                  <button
+                    onClick={() => copyToClipboard('100029929292')}
+                    className="p-1 rounded bg-muted hover:bg-muted/80 transition-colors"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
 
               <div className="flex justify-between pt-2 border-t border-border">
                 <span className="text-muted-foreground">Amount to Pay</span>
@@ -293,8 +289,8 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
               We will process your order once payment is confirmed.
             </p>
 
-            <Button onClick={onClose} variant="outline" size="lg" className="w-full">
-              Done
+            <Button onClick={() => { onClose(); window.location.href = '/payment'; }} variant="outline" size="lg" className="w-full">
+              I have paid
             </Button>
           </>
         )}

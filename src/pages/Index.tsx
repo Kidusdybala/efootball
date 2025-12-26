@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { BottomNav } from '@/components/BottomNav';
 import { ItemCard } from '@/components/ItemCard';
@@ -7,12 +8,21 @@ import { coinPackages, Accounts } from '@/data/mockData';
 import { TabType, CoinPackage, Account, Team } from '@/types';
 
 const Index = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<TabType>('coins');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<{
     item: CoinPackage | Account | Team;
     type: 'coin' | 'account' | 'team';
   } | null>(null);
+
+  useEffect(() => {
+    if (location.pathname === '/accounts') {
+      setActiveTab('Accounts');
+    } else {
+      setActiveTab('coins');
+    }
+  }, [location.pathname]);
 
   const filteredItems = useMemo(() => {
     const query = searchQuery.toLowerCase();
@@ -79,7 +89,7 @@ const Index = () => {
         )}
 
         {/* All Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className={`grid gap-4 ${activeTab === 'coins' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'}`}>
           {filteredItems.map((item, index) => (
             <div 
               key={item.id}

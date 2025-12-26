@@ -1,7 +1,7 @@
 import { Coins, Users } from 'lucide-react';
 import { TabType } from '@/types';
 import { cn } from '@/lib/utils';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface BottomNavProps {
   activeTab: TabType;
@@ -15,6 +15,7 @@ const tabs = [
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const isAdmin = location.pathname.startsWith('/admin');
 
   if (isAdmin) return null;
@@ -29,11 +30,11 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           return (
             <button
               key={tab.id}
-              onClick={() => onTabChange(tab.id)}
+              onClick={() => isAdmin ? onTabChange(tab.id) : navigate(tab.id === 'coins' ? '/coins' : '/accounts')}
               className={cn(
                 "flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300",
-                isActive 
-                  ? "text-primary bg-primary/10" 
+                isActive
+                  ? "text-primary bg-primary/10"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >

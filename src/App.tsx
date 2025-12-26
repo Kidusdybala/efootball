@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
 import UserDashboard from "./pages/UserDashboard";
+import ReceiptUpload from "./pages/ReceiptUpload";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,9 +24,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/coins" element={<Index />} />
+            <Route path="/accounts" element={<Index />} />
             <Route path="/login" element={<UserLogin />} />
             <Route path="/signup" element={<UserSignup />} />
             <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/payment" element={<ReceiptUpload />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
