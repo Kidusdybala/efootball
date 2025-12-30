@@ -1,0 +1,52 @@
+{
+  "header": {
+    "signUp": "Sign Up",
+    "searchPlaceholder": "Search coins, accounts, Accounts...",
+    "title": "AURA SHOP",
+    "subtitle": "Premium eFootball Coins, Accounts & Accounts",
+    "altText": "AuraShop eFootball Marketplace"
+  },
+  "index": {
+    "featured": "Featured",
+    "items": "items",
+    "noItems": "No items found",
+    "coins": "Coins",
+    "accounts": "Accounts",
+    "off": "OFF",
+    "lv": "Lv.",
+    "days": "days"
+  },
+  "orderModal": {
+    "teamGallery": "Team Gallery",
+    "proceedToPurchase": "Proceed to Purchase",
+    "fullName": "Full Name",
+    "enterFullName": "Enter your full name",
+    "phoneNumber": "Phone Number",
+    "enterPhoneNumber": "Enter your phone number",
+    "emailAddress": "Email Address",
+    "enterEmail": "Enter your email",
+    "chooseBank": "Choose Bank",
+    "quantity": "Quantity",
+    "totalPrice": "Total Price",
+    "placeOrder": "Place Order",
+    "orderPlaced": "Order Placed!",
+    "yourOrderId": "Your Order ID:",
+    "paymentDetails": "Payment Details",
+    "bank": "Bank",
+    "mockBank": "Mock Bank",
+    "accountName": "Account Name",
+    "yakobAbdella": "Yakob Abdella",
+    "accountNumber": "Account Number",
+    "amountToPay": "Amount to Pay",
+    "paymentInstruction": "Please transfer the exact amount and We will process your order once payment is confirmed.",
+    "iHavePaid": "I have paid"
+  },
+  "toast": {
+    "error": "Error",
+    "selectBank": "Please select a bank",
+    "orderCreated": "Order Created!",
+    "orderId": "Your order ID is",
+    "copied": "Copied!",
+    "accountNumberCopied": "Account number copied to clipboard"
+  }
+}

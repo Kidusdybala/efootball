@@ -1,0 +1,49 @@
+{
+  "header": {
+    "signUp": "ተመዝገብ",
+    "searchPlaceholder": "ኮይኖችን፣ መለያዎችን ፈልግ...",
+    "title": "ኦራ ሾፕ",
+    "subtitle": "ፕሪሚየም ኢፎትቦል ኮይኖች፣ መለያዎች እና መለያዎች",
+    "altText": "ኦራሾፕ ኢፎትቦል የገበያ ቦታ"
+  },
+  "index": {
+    "featured": "ተለይተዋል",
+    "items": "እቃዎች",
+    "noItems": "ምንም እቃዎች አልተለዩም",
+    "coins": "ኮይኖች",
+    "accounts": "መለያዎች",
+    "off": "ቅናሽ",
+    "lv": "ደረጃ",
+    "days": "ቀናት"
+  },
+  "orderModal": {
+    "teamGallery": "ቡድኖች",
+    "proceedToPurchase": "ወደ ገዢ ቀጥል",
+    "fullName": "ሙሉ ስም",
+    "enterFullName": "ሙሉ ስም አስገባ",
+    "phoneNumber": "ስልክ ቁጥር",
+    "enterPhoneNumber": "ስልክ ቁጥር አስገባ",
+    "emailAddress": "ኢሜይል አድራሻ",
+    "enterEmail": "ኢሜይል አስገባ",
+    "chooseBank": "ባንክ ምረጥ",
+    "quantity": "ብዛት",
+    "totalPrice": "አጠቃላይ ዋጋ",
+    "placeOrder": "ትእዛዝ አስቀምጥ",
+    "orderPlaced": "ትእዛዞ ታዞዋል",
+    "yourOrderId": "የእርስዎ ትእዛዝ መለያ:",
+    "paymentDetails": "የክፍያ ዝርዝሮች",
+    "bank": "ባንክ",
+    "accountName": "የመለያ ስም",
+    "accountNumber": "የመለያ ቁጥር",
+    "amountToPay": "መክፈል ያለበት መጠን",
+    "paymentInstruction": "ትክክለኛውን መጠን ያስተላልፉ እና በክፍያ ማጣቀሻ ውስጥ የትእዛዝ መለያ ያካትቱ። ክፍያ ከተረጋገጠ ትእዛዝዎን እንሰራለን።",
+    "iHavePaid": "ክፍያ አደረግሁ"
+  },
+  "toast": {
+    "error": "ስህተት",
+    "selectBank": "ባንክ ያስተያዩ",
+    "orderCreated": "ትእዛዞ ታዞዋል",
+    "orderId": "የእርስዎ ትእዛዝ መለያ",
+    "accountNumberCopied": "የመለያ ቁጥር ወደ ቅንጥብ ሰሌዳ ተቀዳ"
+  }
+}
