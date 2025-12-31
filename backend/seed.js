@@ -13,7 +13,7 @@ const seedAdmin = async () => {
 
   const admin = new Admin({
     username: 'admin',
-    password: 'admin123', // This will be hashed
+    password: 'admin123',
   });
 
   await admin.save();

@@ -376,7 +376,7 @@ export default function AdminDashboard() {
                       <tr key={order._id} className="border-b border-border/50">
                         <td className="py-3 px-2 text-sm font-mono text-foreground">{order.orderId}</td>
                         <td className="py-3 px-2 text-sm text-foreground">{order.customerInfo.name}</td>
-                        <td className="py-3 px-2 text-sm text-foreground">{order.item.title}</td>
+                        <td className="py-3 px-2 text-sm text-foreground">{order.item?.title || 'Unknown Item'}</td>
                         <td className="py-3 px-2 text-sm font-bold text-primary">{order.totalPrice.toFixed(2)}</td>
                         <td className="py-3 px-2">
                           <span className={cn("px-2 py-1 rounded-full text-xs font-medium capitalize", getStatusColor(order.status))}>
@@ -399,7 +399,7 @@ export default function AdminDashboard() {
                       </span>
                     </div>
                     <p className="text-xs text-muted-foreground mb-1">{order.customerInfo.name}</p>
-                    <p className="text-xs text-foreground mb-2">{order.item.title}</p>
+                    <p className="text-xs text-foreground mb-2">{order.item?.title || 'Unknown Item'}</p>
                     <p className="text-sm font-bold text-primary">{order.totalPrice.toFixed(2)}</p>
                   </div>
                 ))}

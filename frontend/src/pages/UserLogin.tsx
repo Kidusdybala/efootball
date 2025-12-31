@@ -39,7 +39,7 @@ export default function UserLogin() {
           title: 'Welcome back!',
           description: 'Successfully logged in',
         });
-        navigate('/');
+        navigate('/dashboard');
       } else {
         toast({
           title: 'Login failed',
@@ -135,7 +135,7 @@ export default function UserLogin() {
 
           <div className="mt-6 text-center">
             <Link
-              to="/"
+              to="/dashboard"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               ← Back to Store

@@ -18,12 +18,18 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (location.pathname === '/accounts') {
+    if (location.pathname.includes('/accounts')) {
       setActiveTab('accounts');
     } else {
       setActiveTab('coins');
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isLoggedIn && !isLoading) {
+      navigate('/login');
+    }
+  }, [isLoggedIn, isLoading, navigate]);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -40,7 +46,6 @@ const Index = () => {
           setListings(data.map((listing) => ({ ...listing, id: listing._id } as CoinPackage | Account | Team)));
         }
       } catch (error) {
-        console.error('Error fetching listings:', error);
         // No fallback - all data should be in MongoDB
         setListings([]);
       } finally {
@@ -51,12 +56,14 @@ const Index = () => {
     fetchListings();
   }, []);
 
+
   const filteredItems = useMemo(() => {
     const query = searchQuery.toLowerCase();
 
     return listings
       .filter(item =>
         (activeTab === 'coins' ? item.type === 'coin' : item.type === 'account' || item.type === 'team') &&
+        !item.title.includes('Japan') &&
         (item.title.toLowerCase().includes(query) ||
          item.description.toLowerCase().includes(query))
       )
@@ -104,10 +111,10 @@ const Index = () => {
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <ItemCard
-                 item={item}
-                 type={item.type}
-                 onClick={() => navigate(`/order/${item.id}`)}
-               />
+                item={item}
+                type={item.type}
+                onClick={() => navigate(`/order/${item.id}`)}
+              />
             </div>
           ))}
         </div>
@@ -117,6 +124,7 @@ const Index = () => {
             <p className="text-muted-foreground">{t('index.noItems')}</p>
           </div>
         )}
+
       </main>
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />

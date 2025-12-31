@@ -32,7 +32,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
           return (
             <button
               key={tab.id}
-              onClick={() => isAdmin ? onTabChange(tab.id) : navigate(tab.id === 'coins' ? '/coins' : '/accounts')}
+              onClick={() => isAdmin ? onTabChange(tab.id) : navigate(tab.id === 'coins' ? '/shop' : '/shop/accounts')}
               className={cn(
                 "flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300",
                 isActive

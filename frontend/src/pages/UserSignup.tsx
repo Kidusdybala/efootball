@@ -172,7 +172,7 @@ export default function UserSignup() {
 
           <div className="mt-6 text-center">
             <Link
-              to="/"
+              to="/dashboard"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               ← Back to Store

@@ -7,14 +7,8 @@ const adminSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-adminSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
-adminSchema.methods.comparePassword = async function(candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+adminSchema.methods.comparePassword = function(candidatePassword) {
+  return this.password === candidatePassword;
 };
 
 module.exports = mongoose.model('Admin', adminSchema);

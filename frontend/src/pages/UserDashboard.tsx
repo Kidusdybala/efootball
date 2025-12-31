@@ -65,7 +65,7 @@ export default function UserDashboard() {
       title: 'Logged out',
       description: 'You have been logged out successfully',
     });
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const getStatusColor = (status: string) => {
@@ -137,7 +137,7 @@ export default function UserDashboard() {
       <header className="sticky top-0 z-40 glass-card border-b border-border/50">
         <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-4">
-            <Link to="/" className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors flex-shrink-0">
+            <Link to="/dashboard" className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors flex-shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div className="min-w-0">
@@ -163,7 +163,7 @@ export default function UserDashboard() {
               <h3 className="font-display text-xl font-bold text-foreground mb-2">No orders yet</h3>
               <p className="text-muted-foreground mb-6">Start shopping to see your orders here</p>
               <Button asChild>
-                <Link to="/">Browse Products</Link>
+                <Link to="/dashboard">Browse Products</Link>
               </Button>
             </div>
           ) : (

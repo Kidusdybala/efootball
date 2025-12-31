@@ -8,7 +8,7 @@ const router = express.Router();
 // Admin login
 router.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
-  console.log('Admin login attempt:', username, password);
+  console.log('Admin login attempt:', username);
 
   try {
     const admin = await Admin.findOne({ username });
@@ -17,14 +17,14 @@ router.post('/admin/login', async (req, res) => {
       console.log('Admin not found');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-    const isValid = await admin.comparePassword(password);
+    const isValid = admin.comparePassword(password);
     console.log('Password valid:', isValid);
     if (!isValid) {
       console.log('Invalid password');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: admin._id, role: 'admin' }, process.env.JWT_SECRET);
     res.json({ token, admin: { id: admin._id, name: admin.name, username: admin.username } });
   } catch (err) {
     console.error('Admin login error:', err);
@@ -53,17 +53,30 @@ router.post('/signup', async (req, res) => {
 
 // User login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+  if (email) email = email.trim();
+  if (password) password = password.trim();
+  
+  console.log('User login attempt:', email, 'Password:', password);
 
   try {
     const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
+    console.log('User found:', !!user);
+    if (user) {
+      console.log('Stored password:', user.password);
+      console.log('Password match:', user.password === password);
+    }
+    
+    if (!user || !(user.comparePassword(password))) {
+      console.log('Login failed: Invalid credentials');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user._id, role: 'user' }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    console.log('Login successful');
+    const token = jwt.sign({ id: user._id, role: 'user' }, process.env.JWT_SECRET);
     res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (err) {
+    console.error('Login error:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -94,7 +107,7 @@ router.put('/admin/profile', verifyToken, async (req, res) => {
 
     // If updating password, verify current password
     if (newPassword) {
-      const isValid = await admin.comparePassword(currentPassword);
+      const isValid = admin.comparePassword(currentPassword);
       if (!isValid) {
         return res.status(400).json({ message: 'Current password is incorrect' });
       }

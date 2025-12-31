@@ -25,14 +25,17 @@ const App = () => (
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-           <Route path="/" element={<Index />} />
+           <Route path="/" element={<UserDashboard />} />
            <Route path="/coins" element={<Index />} />
            <Route path="/accounts" element={<Index />} />
+           <Route path="/shop" element={<Index />} />
+           <Route path="/shop/coins" element={<Index />} />
+           <Route path="/shop/accounts" element={<Index />} />
            <Route path="/order/:itemId" element={<OrderForm />} />
            <Route path="/order/:orderId/payment" element={<PaymentDetails />} />
            <Route path="/login" element={<UserLogin />} />
            <Route path="/signup" element={<UserSignup />} />
-           <Route path="/dashboard" element={<UserDashboard />} />
+           <Route path="/dashboard" element={<Index />} />
            <Route path="/payment" element={<ReceiptUpload />} />
            <Route path="/admin" element={<AdminLogin />} />
            <Route path="/admin/dashboard" element={<AdminDashboard />} />

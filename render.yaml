@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: efootball-backend
+    rootDir: backend
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: $MONGODB_URI
+      - key: JWT_SECRET
+        value: $JWT_SECRET
+      - key: PORT
+        value: 5000
+      - key: TELEGRAM_CHAT_ID
+        value: $TELEGRAM_CHAT_ID
+      - key: TELEGRAM_BOT_TOKEN
+        value: $TELEGRAM_BOT_TOKEN
+      - key: CLOUDINARY_CLOUD_NAME
+        value: $CLOUDINARY_CLOUD_NAME
+      - key: CLOUDINARY_API_KEY
+        value: $CLOUDINARY_API_KEY
+      - key: CLOUDINARY_API_SECRET
+        value: $CLOUDINARY_API_SECRET
+  - type: static
+    name: efootball-frontend
+    rootDir: frontend
+    buildCommand: npm run build
+    publishDir: dist

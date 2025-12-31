@@ -127,8 +127,8 @@ export default function AdminLogin() {
           </form>
 
           <div className="mt-6 text-center">
-            <Link 
-              to="/"
+            <Link
+              to="/dashboard"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               ← Back to Store

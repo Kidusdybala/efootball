@@ -72,9 +72,6 @@ const seedListings = async () => {
       price: 1650,
       amount: 1040,
       images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
-      discount: true,
-      discountPercentage: 15,
-      discountDays: 5,
     },
     {
       type: 'coin',
@@ -99,9 +96,6 @@ const seedListings = async () => {
       price: 8200,
       amount: 5700,
       images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
-      discount: true,
-      discountPercentage: 10,
-      discountDays: 3,
     },
     {
       type: 'coin',
@@ -158,16 +152,14 @@ const seedListings = async () => {
       discountPercentage: 10,
       discountDays: 3,
     },
+    // Japan Region
     {
       type: 'coin',
-      title: '2700 Coins (Japan Region)',
+      title: ' 2700 Coins (Japan Region)',
       description: '2700 eFootball Coins - Japan Region Special',
       price: 2700,
       amount: 2700,
       images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
-      discount: true,
-      discountPercentage: 5,
-      discountDays: 1,
     },
     // Accounts
     {

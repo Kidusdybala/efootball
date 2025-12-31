@@ -52,19 +52,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
         
-        {type === 'coin' && (
-          <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-secondary/90 text-secondary-foreground px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">
-            <Coins className="w-3 h-3" />
-            {formatNumber((item as CoinPackage).amount)}
-          </div>
-        )}
         
-        {type === 'account' && (
-          <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-accent/90 text-accent-foreground px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">
-            <TrendingUp className="w-3 h-3" />
-            Lv.{(item as Account).level}
-          </div>
-        )}
         
         {type === 'team' && (
           <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-primary/90 text-primary-foreground px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">
@@ -100,12 +88,6 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           )}
         </div>
 
-        {type === 'account' && (
-          <div className="flex items-center gap-1 text-secondary">
-            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
-            <span className="text-[8px] sm:text-xs font-bold">{(item as Account).rating}</span>
-          </div>
-        )}
 
         {type === 'team' && (
           <span className="text-[8px] sm:text-xs text-muted-foreground">
