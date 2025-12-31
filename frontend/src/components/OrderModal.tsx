@@ -135,17 +135,19 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
           <TeamGallery images={teamImages} onProceed={() => setStep('form')} />
         ) : step === 'form' ? (
           <>
-            <div className="flex items-center gap-4 mb-6">
-              <img
-                src={item.images[0]}
-                alt={item.title}
-                className="w-16 h-16 rounded-lg object-cover"
-              />
-              <div>
-                <h3 className="font-display font-bold text-foreground">{item.title}</h3>
-                <p className="text-primary font-bold">{item.price.toFixed(2)}</p>
+            {type !== 'account' && (
+              <div className="flex items-center gap-4 mb-6">
+                <img
+                  src={item.images[0]}
+                  alt={item.title}
+                  className="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 className="font-display font-bold text-foreground">{item.title}</h3>
+                  <p className="text-primary font-bold">{item.price.toFixed(2)}</p>
+                </div>
               </div>
-            </div>
+            )}
 
             <OrderForm
               item={item}
