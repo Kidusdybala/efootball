@@ -12,7 +12,7 @@ import { cn, API_BASE_URL } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { AdminHeader, DashboardStats, ListingsGrid, OrdersTable, AddListingModal, AdminProfileModal } from '@/components/admin';
 
-type AdminTab = 'dashboard' | 'coins' | 'accounts' | 'orders';
+type AdminTab = 'dashboard' | 'coins' | 'accounts';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -50,7 +50,6 @@ export default function AdminDashboard() {
     let tab: AdminTab = 'dashboard';
     if (path.endsWith('/coins')) tab = 'coins';
     else if (path.endsWith('/accounts')) tab = 'accounts';
-    else if (path.endsWith('/orders')) tab = 'orders';
     setActiveTab(tab);
   }, [location.pathname]);
 
@@ -94,8 +93,7 @@ export default function AdminDashboard() {
     setActiveTab(tab);
     const path = tab === 'dashboard' ? '/admin/dashboard' :
                  tab === 'coins' ? '/admin/dashboard/coins' :
-                 tab === 'accounts' ? '/admin/dashboard/accounts' :
-                 '/admin/dashboard/orders';
+                 '/admin/dashboard/accounts';
     navigate(path);
   };
 
@@ -313,7 +311,6 @@ export default function AdminDashboard() {
     { id: 'dashboard' as AdminTab, label: 'Dashboard', icon: LayoutDashboard },
     { id: 'coins' as AdminTab, label: 'Coins', icon: Coins },
     { id: 'accounts' as AdminTab, label: 'Accounts', icon: Users },
-    { id: 'orders' as AdminTab, label: 'Orders', icon: ShoppingCart },
   ];
 
   const stats = [
@@ -424,16 +421,6 @@ export default function AdminDashboard() {
             onAddNew={handleAddNew}
             onEdit={handleEdit}
             onDelete={handleDelete}
-          />
-        )}
-
-        {activeTab === 'orders' && (
-          <OrdersTable
-            orders={orders}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            onStatusChange={handleStatusChange}
-            getStatusColor={getStatusColor}
           />
         )}
       </div>

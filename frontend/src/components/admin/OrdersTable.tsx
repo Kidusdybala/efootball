@@ -8,9 +8,7 @@ interface Order {
     name: string;
     email: string;
   };
-  item: {
-    title: string;
-  };
+  item: string; // ID
   amount: number;
   totalPrice: number;
   status: string;
@@ -23,9 +21,10 @@ interface OrdersTableProps {
   onSearchChange: (query: string) => void;
   onStatusChange: (orderId: string, status: string) => void;
   getStatusColor: (status: string) => string;
+  listingMap: Map<string, string>;
 }
 
-export function OrdersTable({ orders, searchQuery, onSearchChange, onStatusChange, getStatusColor }: OrdersTableProps) {
+export function OrdersTable({ orders, searchQuery, onSearchChange, onStatusChange, getStatusColor, listingMap }: OrdersTableProps) {
   return (
     <div className="space-y-6">
       <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-1">Orders Management</h2>
@@ -58,7 +57,7 @@ export function OrdersTable({ orders, searchQuery, onSearchChange, onStatusChang
                   <span className="text-foreground">{order.customerInfo.name}</span> · {order.customerInfo.email}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {order.item.title} × {order.amount}
+                  {order.item ? (listingMap.get(order.item) || 'Unknown Item') : 'Unknown Item'} × {order.amount}
                 </p>
               </div>
               <div className="flex items-center gap-4">
