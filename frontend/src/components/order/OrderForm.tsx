@@ -26,7 +26,7 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
   useEffect(() => {
     const fetchPaymentMethods = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/payment-methods');
+        const response = await fetch('https://efootball-3.onrender.com/api/payment-methods');
         if (response.ok) {
           const data = await response.json();
           setPaymentMethods(data);

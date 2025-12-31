@@ -31,7 +31,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
   useEffect(() => {
     const fetchPaymentMethods = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/payment-methods');
+        const response = await fetch('https://efootball-3.onrender.com/api/payment-methods');
         if (response.ok) {
           const data = await response.json();
           setPaymentMethods(data);
@@ -88,7 +88,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
         totalPrice: totalPrice,
       };
 
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch('https://efootball-3.onrender.com/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -18,14 +18,14 @@ const PaymentDetailsPage = () => {
     const fetchData = async () => {
       try {
         // Fetch payment methods
-        const pmResponse = await fetch('http://localhost:5000/api/payment-methods');
+        const pmResponse = await fetch('https://efootball-3.onrender.com/api/payment-methods');
         if (pmResponse.ok) {
           const pmData = await pmResponse.json();
           setPaymentMethods(pmData);
         }
 
         // Fetch order details
-        const orderResponse = await fetch(`http://localhost:5000/api/orders/${orderId}`);
+        const orderResponse = await fetch(`https://efootball-3.onrender.com/api/orders/${orderId}`);
         if (orderResponse.ok) {
           const orderData = await orderResponse.json();
           setOrder(orderData);

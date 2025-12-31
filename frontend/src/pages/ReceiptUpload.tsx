@@ -42,7 +42,7 @@ export default function ReceiptUpload() {
     formData.append('receipt', file);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/receipt`, {
+      const response = await fetch(`https://efootball-3.onrender.com/api/orders/${orderId}/receipt`, {
         method: 'POST',
         body: formData,
       });

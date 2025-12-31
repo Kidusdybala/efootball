@@ -14,7 +14,7 @@ const OrderFormPage = () => {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/listings/${itemId}`);
+        const response = await fetch(`https://efootball-3.onrender.com/api/listings/${itemId}`);
         if (response.ok) {
           const data: Listing = await response.json();
           setItem({ ...data, id: data._id } as CoinPackage | Account | Team);
@@ -66,7 +66,7 @@ const OrderFormPage = () => {
         totalPrice,
       };
 
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch('https://efootball-3.onrender.com/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -40,7 +40,7 @@ const Index = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/listings');
+        const response = await fetch('https://efootball-3.onrender.com/api/listings');
         if (response.ok) {
           const data: Listing[] = await response.json();
           setListings(data.map((listing) => ({ ...listing, id: listing._id } as CoinPackage | Account | Team)));

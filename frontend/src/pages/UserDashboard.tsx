@@ -33,7 +33,7 @@ export default function UserDashboard() {
     // Fetch orders from backend
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/orders/user/${user.email}`);
+        const response = await fetch(`https://efootball-3.onrender.com/api/orders/user/${user.email}`);
         if (response.ok) {
           const data = await response.json();
           const formattedOrders = data.map((order: any) => ({
