@@ -4,6 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CoinPackage, Account, Team, PaymentMethod } from '@/types';
+import team1 from '@/assets/teams/2abc9e5b3b48009af50a016530aa6af6.jpg';
+import team2 from '@/assets/teams/352be9320c1d8682ce6b0da5aeb51aaa.jpg';
+import team3 from '@/assets/teams/3d0fac9139511c599579d12daeffdf85.jpg';
+import team4 from '@/assets/teams/4d16b11b664be199dc41acc9ee2d9c79.jpg';
+import team5 from '@/assets/teams/83b2288ce46adf26ccded8a2677ce6d1.jpg';
+import team6 from '@/assets/teams/e31b1b057ca3b49857a23114ac0e5e71.jpg';
 
 interface OrderFormProps {
   item: CoinPackage | Account | Team;
@@ -13,7 +19,6 @@ interface OrderFormProps {
     phone: string;
     email: string;
     quantity: number;
-    selectedBank: string;
   };
   onFormChange: (data: Partial<OrderFormProps['formData']>) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -38,8 +43,20 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
 
     fetchPaymentMethods();
   }, []);
+
+  const teamImages = [team1, team2, team3, team4, team5, team6];
+
   return (
     <form onSubmit={onSubmit} className="space-y-4">
+      {type === 'account' && (
+        <div className="mb-6">
+          <img
+            src={teamImages[0]}
+            alt="Team"
+            className="w-full h-48 object-cover rounded-lg"
+          />
+        </div>
+      )}
       <div className="space-y-2">
         <Label htmlFor="name" className="flex items-center gap-2">
           <User className="w-4 h-4" />
@@ -71,53 +88,22 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
         />
       </div>
 
-      {type !== 'account' && (
-        <div className="space-y-2">
-          <Label htmlFor="email" className="flex items-center gap-2">
-            <Mail className="w-4 h-4" />
-            Email Address
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) => onFormChange({ email: e.target.value })}
-            placeholder="Enter your email"
-            className="bg-muted border-border"
-          />
-        </div>
-      )}
+      <div className="space-y-2">
+        <Label htmlFor="email" className="flex items-center gap-2">
+          <Mail className="w-4 h-4" />
+          Email Address
+        </Label>
+        <Input
+          id="email"
+          type="email"
+          required
+          value={formData.email}
+          onChange={(e) => onFormChange({ email: e.target.value })}
+          placeholder="Enter your email"
+          className="bg-muted border-border"
+        />
+      </div>
 
-      {type === 'account' && (
-        <div className="space-y-2">
-          <Label className="flex items-center gap-2">
-            <Package className="w-4 h-4" />
-            Choose Bank
-          </Label>
-          <div className="grid grid-cols-3 gap-2">
-            {paymentMethods.map((method) => (
-              <button
-                key={method.id}
-                type="button"
-                onClick={() => onFormChange({ selectedBank: method.id })}
-                className={`flex flex-col items-center p-2 border rounded-lg transition-all duration-200 ${
-                  formData.selectedBank === method.id
-                    ? 'border-2 border-primary bg-green-50'
-                    : 'border-border bg-white hover:bg-gray-50 hover:shadow-sm'
-                }`}
-              >
-                <img
-                  src={method.image}
-                  alt={method.name}
-                  className="w-10 h-10 mb-1 object-contain"
-                />
-                <span className="text-sm font-medium text-gray-900 text-center">{method.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {type === 'coin' && (
         <div className="space-y-2">

@@ -23,7 +23,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [step, setStep] = useState<'gallery' | 'form' | 'payment'>(type === 'account' ? 'gallery' : 'form');
+  const [step, setStep] = useState<'gallery' | 'form' | 'payment'>('form');
   const [orderId, setOrderId] = useState('');
   const [copied, setCopied] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
@@ -48,7 +48,6 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
     phone: '',
     email: '',
     quantity: 1,
-    selectedBank: '',
     notes: '',
   });
 
@@ -56,7 +55,6 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
 
   const teamImages = [team1, team2, team3, team4, team5, team6];
 
-  const selectedBank = paymentMethods.find(bank => bank.id === formData.selectedBank);
 
   const generateOrderId = () => {
     return `AUR-${Date.now().toString(36).toUpperCase()}`;
@@ -64,14 +62,6 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (type === 'account' && !formData.selectedBank) {
-      toast({
-        title: t('toast.error'),
-        description: t('toast.selectBank'),
-        variant: "destructive",
-      });
-      return;
-    }
 
     const newOrderId = generateOrderId();
 
