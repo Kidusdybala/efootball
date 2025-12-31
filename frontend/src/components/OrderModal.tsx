@@ -6,6 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { OrderForm, PaymentDetails, TeamGallery } from '@/components/order';
+import { API_BASE_URL } from '@/lib/utils';
 import team1 from '@/assets/teams/2abc9e5b3b48009af50a016530aa6af6.jpg';
 import team2 from '@/assets/teams/352be9320c1d8682ce6b0da5aeb51aaa.jpg';
 import team3 from '@/assets/teams/3d0fac9139511c599579d12daeffdf85.jpg';
@@ -31,7 +32,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
   useEffect(() => {
     const fetchPaymentMethods = async () => {
       try {
-        const response = await fetch('https://efootball-3.onrender.com/api/payment-methods');
+        const response = await fetch(`${API_BASE_URL}/api/payment-methods`);
         if (response.ok) {
           const data = await response.json();
           setPaymentMethods(data);
@@ -78,7 +79,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
         totalPrice: totalPrice,
       };
 
-      const response = await fetch('https://efootball-3.onrender.com/api/orders', {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

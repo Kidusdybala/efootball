@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Upload } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/utils';
 
 export default function ReceiptUpload() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function ReceiptUpload() {
     formData.append('receipt', file);
 
     try {
-      const response = await fetch(`https://efootball-3.onrender.com/api/orders/${orderId}/receipt`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/receipt`, {
         method: 'POST',
         body: formData,
       });

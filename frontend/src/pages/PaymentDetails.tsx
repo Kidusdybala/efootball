@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { PaymentDetails as PaymentDetailsComponent } from '@/components/order';
 import { PaymentMethod, Order } from '@/types';
 import { ArrowLeft } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/utils';
 
 const PaymentDetailsPage = () => {
   const { orderId } = useParams<{ orderId: string }>();
@@ -18,14 +19,14 @@ const PaymentDetailsPage = () => {
     const fetchData = async () => {
       try {
         // Fetch payment methods
-        const pmResponse = await fetch('https://efootball-3.onrender.com/api/payment-methods');
+        const pmResponse = await fetch(`${API_BASE_URL}/api/payment-methods`);
         if (pmResponse.ok) {
           const pmData = await pmResponse.json();
           setPaymentMethods(pmData);
         }
 
         // Fetch order details
-        const orderResponse = await fetch(`https://efootball-3.onrender.com/api/orders/${orderId}`);
+        const orderResponse = await fetch(`${API_BASE_URL}/api/orders/${orderId}`);
         if (orderResponse.ok) {
           const orderData = await orderResponse.json();
           setOrder(orderData);

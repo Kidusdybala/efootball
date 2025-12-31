@@ -8,7 +8,7 @@ import {
   ShoppingCart
 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
-import { cn } from '@/lib/utils';
+import { cn, API_BASE_URL } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { AdminHeader, DashboardStats, ListingsGrid, OrdersTable, AddListingModal, AdminProfileModal } from '@/components/admin';
 
@@ -60,10 +60,10 @@ export default function AdminDashboard() {
 
       try {
         const [listingsRes, ordersRes] = await Promise.all([
-          fetch('https://efootball-3.onrender.com/api/listings', {
+          fetch(`${API_BASE_URL}/api/listings`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch('https://efootball-3.onrender.com/api/orders', {
+          fetch(`${API_BASE_URL}/api/orders`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
   const handleStatusChange = async (orderId: string, status: string) => {
     const token = localStorage.getItem('admin_token');
     try {
-      const response = await fetch(`https://efootball-3.onrender.com/api/orders/${orderId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
   const handleAddSubmit = async (data: FormData) => {
     const token = localStorage.getItem('admin_token');
     try {
-      const response = await fetch('https://efootball-3.onrender.com/api/listings', {
+      const response = await fetch(`${API_BASE_URL}/api/listings`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
   const handleEditSubmit = async (data: FormData) => {
     const token = localStorage.getItem('admin_token');
     try {
-      const response = await fetch(`https://efootball-3.onrender.com/api/listings/${editingItem._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/listings/${editingItem._id}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -235,7 +235,7 @@ export default function AdminDashboard() {
   const handleProfileUpdate = async (data: { name: string; currentPassword: string; newPassword: string }) => {
     const token = localStorage.getItem('admin_token');
     try {
-      const response = await fetch('https://efootball-3.onrender.com/api/auth/admin/profile', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/admin/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ export default function AdminDashboard() {
   const confirmDelete = async () => {
     const token = localStorage.getItem('admin_token');
     try {
-      const response = await fetch(`https://efootball-3.onrender.com/api/listings/${deletingItem._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/listings/${deletingItem._id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

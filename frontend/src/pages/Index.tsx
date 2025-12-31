@@ -6,6 +6,7 @@ import { ItemCard } from '@/components/ItemCard';
 import { TabType, CoinPackage, Account, Team, Listing } from '@/types';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { API_BASE_URL } from '@/lib/utils';
 
 const Index = () => {
   const location = useLocation();
@@ -40,7 +41,7 @@ const Index = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('https://efootball-3.onrender.com/api/listings');
+        const response = await fetch(`${API_BASE_URL}/api/listings`);
         if (response.ok) {
           const data: Listing[] = await response.json();
           setListings(data.map((listing) => ({ ...listing, id: listing._id } as CoinPackage | Account | Team)));

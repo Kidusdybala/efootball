@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+import { cn, API_BASE_URL } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { Order } from '@/types';
@@ -33,7 +33,7 @@ export default function UserDashboard() {
     // Fetch orders from backend
     const fetchOrders = async () => {
       try {
-        const response = await fetch(`https://efootball-3.onrender.com/api/orders/user/${user.email}`);
+        const response = await fetch(`${API_BASE_URL}/api/orders/user/${user.email}`);
         if (response.ok) {
           const data = await response.json();
           const formattedOrders = data.map((order: any) => ({

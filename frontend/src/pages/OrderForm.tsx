@@ -4,6 +4,7 @@ import { OrderForm as OrderFormComponent, TeamGallery } from '@/components/order
 import { CoinPackage, Account, Team, Listing } from '@/types';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { API_BASE_URL } from '@/lib/utils';
 
 const OrderFormPage = () => {
   const { itemId } = useParams<{ itemId: string }>();
@@ -14,7 +15,7 @@ const OrderFormPage = () => {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await fetch(`https://efootball-3.onrender.com/api/listings/${itemId}`);
+        const response = await fetch(`${API_BASE_URL}/api/listings/${itemId}`);
         if (response.ok) {
           const data: Listing = await response.json();
           setItem({ ...data, id: data._id } as CoinPackage | Account | Team);
@@ -66,7 +67,7 @@ const OrderFormPage = () => {
         totalPrice,
       };
 
-      const response = await fetch('https://efootball-3.onrender.com/api/orders', {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

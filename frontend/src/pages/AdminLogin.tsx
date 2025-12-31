@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { API_BASE_URL } from '@/lib/utils';
 
 // Demo credentials - in production this would use proper auth
 const ADMIN_CREDENTIALS = {
@@ -27,7 +28,7 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://efootball-3.onrender.com/api/auth/admin/login', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

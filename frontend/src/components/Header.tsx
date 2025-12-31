@@ -1,4 +1,4 @@
-import { Search, UserPlus, Youtube, MessageCircle, LogOut } from 'lucide-react';
+import { Search, UserPlus, Youtube, MessageCircle, LogOut, Shield } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
@@ -31,6 +31,13 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
         
         {/* Social Icons */}
         <div className="absolute top-4 left-4 flex items-center gap-2">
+          <Link
+            to="/admin"
+            className="p-2 rounded-lg bg-black/50 hover:bg-black/60 transition-colors duration-300"
+            title="Admin Login"
+          >
+            <Shield className="w-6 h-6 text-yellow-500" />
+          </Link>
           <a
             href="https://t.me/aurashop333"
             target="_blank"
