@@ -30,6 +30,7 @@ export default function AdminDashboard() {
   const [deletingItem, setDeletingItem] = useState<any>(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [adminData, setAdminData] = useState({ name: '', username: '' });
+  const [listingMap, setListingMap] = useState(new Map());
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
@@ -71,6 +72,8 @@ export default function AdminDashboard() {
         if (listingsRes.ok) {
           const listingsData = await listingsRes.json();
           setListings(listingsData);
+          const map = new Map(listingsData.map(l => [l._id, l.title]));
+          setListingMap(map);
         }
 
         if (ordersRes.ok) {
@@ -164,6 +167,7 @@ export default function AdminDashboard() {
       if (response.ok) {
         const addedListing = await response.json();
         setListings([...listings, addedListing]);
+        setListingMap(new Map([...listingMap, [addedListing._id, addedListing.title]]));
         toast({
           title: 'Added successfully',
           description: 'New listing has been added',
@@ -202,6 +206,7 @@ export default function AdminDashboard() {
       if (response.ok) {
         const updatedListing = await response.json();
         setListings(listings.map(listing => listing._id === editingItem._id ? updatedListing : listing));
+        setListingMap(new Map([...listingMap, [updatedListing._id, updatedListing.title]]));
         toast({
           title: 'Updated successfully',
           description: 'Listing has been updated',
@@ -278,6 +283,9 @@ export default function AdminDashboard() {
 
       if (response.ok) {
         setListings(listings.filter(listing => listing._id !== deletingItem._id));
+        const newMap = new Map(listingMap);
+        newMap.delete(deletingItem._id);
+        setListingMap(newMap);
         toast({
           title: 'Deleted successfully',
           description: 'Listing has been deleted',
@@ -376,7 +384,7 @@ export default function AdminDashboard() {
                       <tr key={order._id} className="border-b border-border/50">
                         <td className="py-3 px-2 text-sm font-mono text-foreground">{order.orderId}</td>
                         <td className="py-3 px-2 text-sm text-foreground">{order.customerInfo.name}</td>
-                        <td className="py-3 px-2 text-sm text-foreground">{order.item?.title || 'Unknown Item'}</td>
+                        <td className="py-3 px-2 text-sm text-foreground">{listingMap.get(order.item) || 'Unknown Item'}</td>
                         <td className="py-3 px-2 text-sm font-bold text-primary">{order.totalPrice.toFixed(2)}</td>
                         <td className="py-3 px-2">
                           <span className={cn("px-2 py-1 rounded-full text-xs font-medium capitalize", getStatusColor(order.status))}>
@@ -399,7 +407,7 @@ export default function AdminDashboard() {
                       </span>
                     </div>
                     <p className="text-xs text-muted-foreground mb-1">{order.customerInfo.name}</p>
-                    <p className="text-xs text-foreground mb-2">{order.item?.title || 'Unknown Item'}</p>
+                    <p className="text-xs text-foreground mb-2">{listingMap.get(order.item) || 'Unknown Item'}</p>
                     <p className="text-sm font-bold text-primary">{order.totalPrice.toFixed(2)}</p>
                   </div>
                 ))}
