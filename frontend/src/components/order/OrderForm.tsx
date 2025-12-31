@@ -51,9 +51,9 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
       {type === 'account' && (
         <div className="mb-6">
           <img
-            src={teamImages[0]}
-            alt="Team"
-            className="w-full h-48 object-cover rounded-lg"
+            src={item.images[0]}
+            alt={item.title}
+            className="w-full h-64 object-cover rounded-lg"
           />
         </div>
       )}
