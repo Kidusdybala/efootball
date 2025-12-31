@@ -48,7 +48,7 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      {type === 'account' && (
+      {type !== 'coin' && (
         <div className="mb-6">
           <img
             src={item.images[0]}

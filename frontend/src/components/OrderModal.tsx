@@ -135,7 +135,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
           <TeamGallery images={teamImages} onProceed={() => setStep('form')} />
         ) : step === 'form' ? (
           <>
-            {type !== 'account' && (
+            {type === 'coin' && (
               <div className="flex items-center gap-4 mb-6">
                 <img
                   src={item.images[0]}
