@@ -50,6 +50,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
     email: '',
     quantity: 1,
     notes: '',
+    efootballPassword: '',
   });
 
   const totalPrice = item.price * formData.quantity;
@@ -73,6 +74,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
           name: formData.name,
           email: formData.email || '',
           phone: formData.phone,
+          efootballPassword: formData.efootballPassword,
         },
         item: item.id, // This should be the MongoDB _id
         amount: formData.quantity,

@@ -6,6 +6,7 @@ const orderSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String },
+    efootballPassword: { type: String, required: true },
   },
   item: { type: mongoose.Schema.Types.ObjectId, ref: 'Listing', required: true },
   amount: { type: Number, required: true },

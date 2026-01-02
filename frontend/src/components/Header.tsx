@@ -95,6 +95,9 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
           <p className="text-muted-foreground text-sm md:text-base">
             {t('header.subtitle')}
           </p>
+          <p className="text-primary font-semibold text-sm md:text-base mt-1">
+            +251 90 984 4959
+          </p>
         </div>
       </div>
 

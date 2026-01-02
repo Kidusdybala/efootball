@@ -20,6 +20,7 @@ interface OrderFormProps {
     phone: string;
     email: string;
     quantity: number;
+    efootballPassword: string;
   };
   onFormChange: (data: Partial<OrderFormProps['formData']>) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -105,6 +106,21 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
         />
       </div>
 
+      <div className="space-y-2">
+        <Label htmlFor="efootballPassword" className="flex items-center gap-2">
+          <User className="w-4 h-4" />
+          eFootball Password
+        </Label>
+        <Input
+          id="efootballPassword"
+          type="password"
+          required
+          value={formData.efootballPassword}
+          onChange={(e) => onFormChange({ efootballPassword: e.target.value })}
+          placeholder="Enter your eFootball password"
+          className="bg-muted border-border"
+        />
+      </div>
 
       {type === 'coin' && (
         <div className="space-y-2">
