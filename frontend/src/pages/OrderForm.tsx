@@ -39,6 +39,8 @@ const OrderFormPage = () => {
     quantity: 1,
     selectedBank: '',
     notes: '',
+    efootballEmail: '',
+    efootballPassword: '',
   });
 
   const totalPrice = item ? item.price * formData.quantity : 0;
@@ -61,6 +63,8 @@ const OrderFormPage = () => {
           name: formData.name,
           email: formData.email || '',
           phone: formData.phone,
+          efootballEmail: formData.efootballEmail,
+          efootballPassword: formData.efootballPassword,
         },
         item: item.id,
         amount: formData.quantity,
