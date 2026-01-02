@@ -50,6 +50,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
     email: '',
     quantity: 1,
     notes: '',
+    efootballEmail: '',
     efootballPassword: '',
   });
 
@@ -74,6 +75,7 @@ export function OrderModal({ item, type, onClose }: OrderModalProps) {
           name: formData.name,
           email: formData.email || '',
           phone: formData.phone,
+          efootballEmail: formData.efootballEmail,
           efootballPassword: formData.efootballPassword,
         },
         item: item.id, // This should be the MongoDB _id

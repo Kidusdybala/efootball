@@ -20,6 +20,7 @@ interface OrderFormProps {
     phone: string;
     email: string;
     quantity: number;
+    efootballEmail: string;
     efootballPassword: string;
   };
   onFormChange: (data: Partial<OrderFormProps['formData']>) => void;
@@ -102,6 +103,22 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
           value={formData.email}
           onChange={(e) => onFormChange({ email: e.target.value })}
           placeholder="Enter your email"
+          className="bg-muted border-border"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="efootballEmail" className="flex items-center gap-2">
+          <Mail className="w-4 h-4" />
+          eFootball Email
+        </Label>
+        <Input
+          id="efootballEmail"
+          type="email"
+          required
+          value={formData.efootballEmail}
+          onChange={(e) => onFormChange({ efootballEmail: e.target.value })}
+          placeholder="Enter your eFootball account email"
           className="bg-muted border-border"
         />
       </div>
