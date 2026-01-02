@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Phone, Mail, User, Package } from 'lucide-react';
+import { Phone, Mail, User, Package, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -110,31 +110,31 @@ export function OrderForm({ item, type, formData, onFormChange, onSubmit, totalP
       <div className="space-y-2">
         <Label htmlFor="efootballEmail" className="flex items-center gap-2">
           <Mail className="w-4 h-4" />
-          eFootball Email
+          eFootball Email (Account to top-up)
         </Label>
         <Input
           id="efootballEmail"
           type="email"
           required
-          value={formData.efootballEmail}
+          value={formData.efootballEmail || ''}
           onChange={(e) => onFormChange({ efootballEmail: e.target.value })}
-          placeholder="Enter your eFootball account email"
+          placeholder="Enter eFootball account email"
           className="bg-muted border-border"
         />
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="efootballPassword" className="flex items-center gap-2">
-          <User className="w-4 h-4" />
+          <Lock className="w-4 h-4" />
           eFootball Password
         </Label>
         <Input
           id="efootballPassword"
           type="password"
           required
-          value={formData.efootballPassword}
+          value={formData.efootballPassword || ''}
           onChange={(e) => onFormChange({ efootballPassword: e.target.value })}
-          placeholder="Enter your eFootball password"
+          placeholder="Enter eFootball account password"
           className="bg-muted border-border"
         />
       </div>

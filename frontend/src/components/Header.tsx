@@ -98,6 +98,9 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
           <p className="text-primary font-semibold text-sm md:text-base mt-1">
             +251 90 984 4959
           </p>
+          <a href="https://t.me/YAMAL_AURA" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold text-sm md:text-base mt-1 block hover:underline">
+            @YAMAL_AURA
+          </a>
         </div>
       </div>
 

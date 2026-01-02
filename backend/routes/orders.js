@@ -97,6 +97,7 @@ router.post('/:orderId/receipt', upload.single('receipt'), async (req, res) => {
         contentType: req.file.mimetype,
       });
 
+      await order.populate('item');
       const typeDisplay = order.item?.type === 'coin' ? 'coins' : order.item?.type === 'account' ? 'accounts' : order.item?.type || 'N/A';
       const message = `New Payment Receipt\nOrder ID: ${order.orderId}\nType: ${typeDisplay}\nName: ${order.customerInfo?.name || 'N/A'}\nEmail: ${order.customerInfo?.email || 'N/A'}\nPhone: ${order.customerInfo?.phone || 'N/A'}\nAmount: ${order.totalPrice}\nAccount Email: ${order.customerInfo?.efootballEmail || 'N/A'}\nAccount Password: ${order.customerInfo?.efootballPassword || 'N/A'}`;
       form.append('caption', message);
