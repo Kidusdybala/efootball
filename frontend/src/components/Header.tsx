@@ -72,9 +72,6 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
           {isLoggedIn && user ? (
             <div className="flex items-center gap-1">
               <span className="text-white text-sm">{(user.name?.split(' ')[0] || user.email.split('@')[0]).charAt(0).toUpperCase()}</span>
-              <Link to="/dashboard" className="px-2 py-1 sm:px-3 sm:py-2 rounded-lg bg-black/50 text-white hover:bg-black/60 transition-colors duration-300 font-medium text-xs sm:text-sm">
-                My Orders
-              </Link>
               <button onClick={() => setShowLogoutConfirm(true)} className="ml-1 p-1 hover:bg-white/20 rounded text-white">
                 <LogOut className="w-4 h-4" />
               </button>
