@@ -40,7 +40,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
             const coin = item as CoinPackage;
             if (coin.discountEndDate) {
               const remaining = new Date(coin.discountEndDate).getTime() - Date.now();
-              const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+              const days = Math.ceil(remaining / (1000 * 60 * 60 * 24));
               const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
               const label = days > 0
