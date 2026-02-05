@@ -102,12 +102,25 @@ const Index = () => {
         {/* All Items Grid */}
         <div className="space-y-8">
           {activeTab === 'coins' && filteredItems.some(item => item.discount) && (
-            <section>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-2 h-6 bg-primary rounded-full" />
-                <h3 className="font-display text-lg font-bold text-foreground">
-                  {t('index.discountedCoins', 'Discounted Coins')}
-                </h3>
+            <section className="animate-slide-up">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-8 bg-red-600 rounded-full shadow-[0_0_10px_rgba(255,0,0,0.5)]" />
+                  <div>
+                    <h3 className="font-display text-xl font-black text-foreground flex items-center gap-2 tracking-tight">
+                      {t('index.discountedCoins', 'Discounted Coins')}
+                      <span className="text-2xl">🔥</span>
+                    </h3>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-widest">
+                      {t('index.limitedTime', 'Limited Time Offers')}
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden sm:block px-3 py-1 bg-red-600/10 border border-red-600/20 rounded-full">
+                  <span className="text-xs font-bold text-red-600 capitalize">
+                    {t('index.specialDeals', 'Special Deals')}
+                  </span>
+                </div>
               </div>
               <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {filteredItems.filter(item => item.discount).map((item, index) => (
@@ -125,11 +138,16 @@ const Index = () => {
 
           <section>
             {activeTab === 'coins' && filteredItems.some(item => item.discount) && (
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-2 h-6 bg-muted rounded-full" />
-                <h3 className="font-display text-lg font-bold text-foreground">
-                  {t('index.allCoins', 'Regular Packages')}
-                </h3>
+              <div className="flex items-center gap-3 mb-4 mt-8">
+                <div className="w-1.5 h-8 bg-muted rounded-full opacity-50" />
+                <div>
+                  <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2 opacity-80">
+                    {t('index.allCoins', 'Regular Packages')}
+                  </h3>
+                  <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest opacity-60">
+                    {t('index.standardPricing', 'Standard Pricing')}
+                  </p>
+                </div>
               </div>
             )}
             <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">

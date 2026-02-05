@@ -13,8 +13,16 @@
     "coins": "ኮይኖች",
     "accounts": "መለያዎች",
     "off": "ቅናሽ",
+    "save": "ቆጥብ",
     "lv": "ደረጃ",
-    "days": "ቀናት"
+    "day": "ቀን",
+    "days": "ቀናት",
+    "h": "ሰ",
+    "discountedCoins": "የቅናሽ ኮይኖች",
+    "limitedTime": "የተወሰነ ጊዜ ቅናሽ",
+    "specialDeals": "ልዩ አማራጮች",
+    "allCoins": "መደበኛ ጥቅሎች",
+    "standardPricing": "መደበኛ ዋጋ"
   },
   "orderModal": {
     "teamGallery": "ቡድኖች",

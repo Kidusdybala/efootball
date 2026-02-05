@@ -134,6 +134,18 @@
   .animate-slide-up {
     animation: slide-up 0.5s ease-out;
   }
+
+  .discount-tag {
+    @apply flex items-center gap-1 font-black tracking-tighter text-white rounded-md shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 border-2 border-white/30;
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+  }
+
+  .countdown-tag {
+    @apply flex items-center gap-1 font-bold text-white rounded-full px-2 py-0.5 shadow-lg border border-white/10;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+  }
 }
 
 @layer utilities {

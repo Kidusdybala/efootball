@@ -13,8 +13,16 @@
     "coins": "Coins",
     "accounts": "Accounts",
     "off": "OFF",
+    "save": "SAVE",
     "lv": "Lv.",
-    "days": "days"
+    "day": "day",
+    "days": "days",
+    "h": "h",
+    "discountedCoins": "Discounted Coins",
+    "limitedTime": "Limited Time Offers",
+    "specialDeals": "Special Deals",
+    "allCoins": "Regular Packages",
+    "standardPricing": "Standard Pricing"
   },
   "orderModal": {
     "teamGallery": "Team Gallery",

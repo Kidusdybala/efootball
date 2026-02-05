@@ -1,4 +1,4 @@
-import { Star, Coins, TrendingUp } from 'lucide-react';
+import { Star, Coins, TrendingUp, Clock } from 'lucide-react';
 import { CoinPackage, Account, Team } from '@/types';
 import { cn } from '@/lib/utils';
 import discountImage from '@/assets/discount.png';
@@ -29,13 +29,15 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
       )}
     >
       {item.discount && (
-        <div className="absolute top-0.5 right-0.5 z-10 flex flex-col items-center">
-          <img src={discountImage} alt="Discount" className="w-3 h-3 sm:w-8 sm:h-8" />
+        <div className="absolute top-2 right-2 z-20 flex flex-col items-end gap-1.5 pointer-events-none">
           {type === 'coin' && (item as CoinPackage).discountPercentage && (
-            <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded">
-              {(item as CoinPackage).discountPercentage}{t('index.off')}
-            </span>
+            <div className="discount-tag px-1.5 py-0.5 sm:px-2.5 sm:py-1 animate-pulse-glow">
+              <span className="text-[10px] sm:text-sm font-black whitespace-nowrap">
+                {t('index.save', 'SAVE')} {(item as CoinPackage).discountPercentage}%
+              </span>
+            </div>
           )}
+
           {type === 'coin' && (() => {
             const coin = item as CoinPackage;
             if (coin.discountEndDate) {
@@ -43,23 +45,21 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
               const days = Math.ceil(remaining / (1000 * 60 * 60 * 24));
               const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-              const label = days > 0
+              const label = days > 1
                 ? `${days} ${t('index.days', 'Days')}`
-                : hours > 0
-                  ? `${hours} ${t('index.hours', 'Hours')}`
-                  : t('index.closing', 'Closing');
+                : days === 1
+                  ? `1 ${t('index.day', 'Day')}`
+                  : hours > 0
+                    ? `${hours}${t('index.h', 'h')}`
+                    : t('index.closing', 'Closing');
 
               return (
-                <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded mt-0.5 sm:mt-1">
-                  {label}
-                </span>
-              );
-            }
-            if (coin.discountDays) {
-              return (
-                <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded mt-0.5 sm:mt-1">
-                  {coin.discountDays} {t('index.days', 'days')}
-                </span>
+                <div className="countdown-tag px-1.5 py-0.5 sm:px-2 sm:py-0.5">
+                  <Clock className="w-2 h-2 sm:w-3 sm:h-3" />
+                  <span className="text-[8px] sm:text-[10px] font-bold">
+                    {label}
+                  </span>
+                </div>
               );
             }
             return null;
@@ -67,25 +67,23 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
         </div>
       )}
 
-      <div className="h-16 w-full relative mb-0.5 sm:mb-3 rounded-lg overflow-hidden">
+      <div className="h-16 w-full relative mb-1 sm:mb-3 rounded-lg overflow-hidden group">
         <img
           src={item.images[0]}
           alt={item.title}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-
-
+        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-60" />
 
         {type === 'team' && (
-          <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-primary/90 text-primary-foreground px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">
-            <Star className="w-3 h-3" />
+          <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-primary px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold shadow-lg shadow-primary/20">
+            <Star className="w-3 h-3 fill-current" />
             {(item as Team).rating}
           </div>
         )}
       </div>
 
-      <h3 className="font-display text-[8px] sm:text-sm font-semibold text-foreground mb-0 truncate">
+      <h3 className="font-display text-[10px] sm:text-sm font-bold text-foreground mb-0.5 truncate leading-tight">
         {item.title}
       </h3>
 
