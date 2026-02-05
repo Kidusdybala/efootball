@@ -16,6 +16,7 @@ const listingSchema = new mongoose.Schema({
   discount: { type: Boolean, default: false },
   discountPercentage: { type: Number },
   discountDays: { type: Number },
+  discountEndDate: { type: Date },
   createdAt: { type: Date, default: Date.now },
 });
 

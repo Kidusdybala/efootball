@@ -36,14 +36,37 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
               {(item as CoinPackage).discountPercentage}{t('index.off')}
             </span>
           )}
-          {type === 'coin' && (item as CoinPackage).discountDays && (
-            <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded mt-0.5 sm:mt-1">
-              {(item as CoinPackage).discountDays} {t('index.days', 'days')}
-            </span>
-          )}
+          {type === 'coin' && (() => {
+            const coin = item as CoinPackage;
+            if (coin.discountEndDate) {
+              const remaining = new Date(coin.discountEndDate).getTime() - Date.now();
+              const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+              const label = days > 0
+                ? `${days} ${t('index.days', 'Days')}`
+                : hours > 0
+                  ? `${hours} ${t('index.hours', 'Hours')}`
+                  : t('index.closing', 'Closing');
+
+              return (
+                <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded mt-0.5 sm:mt-1">
+                  {label}
+                </span>
+              );
+            }
+            if (coin.discountDays) {
+              return (
+                <span className="text-[6px] sm:text-xs font-bold text-white bg-red-600 px-0.5 sm:px-1 py-0.5 rounded mt-0.5 sm:mt-1">
+                  {coin.discountDays} {t('index.days', 'days')}
+                </span>
+              );
+            }
+            return null;
+          })()}
         </div>
       )}
-      
+
       <div className="h-16 w-full relative mb-0.5 sm:mb-3 rounded-lg overflow-hidden">
         <img
           src={item.images[0]}
@@ -51,9 +74,9 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           className="w-full h-full object-contain"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-        
-        
-        
+
+
+
         {type === 'team' && (
           <div className="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 flex items-center gap-1 bg-primary/90 text-primary-foreground px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold">
             <Star className="w-3 h-3" />
@@ -61,7 +84,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           </div>
         )}
       </div>
-      
+
       <h3 className="font-display text-[8px] sm:text-sm font-semibold text-foreground mb-0 truncate">
         {item.title}
       </h3>

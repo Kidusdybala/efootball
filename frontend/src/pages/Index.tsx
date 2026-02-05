@@ -66,7 +66,7 @@ const Index = () => {
         (activeTab === 'coins' ? item.type === 'coin' : item.type === 'account' || item.type === 'team') &&
         !item.title.includes('Japan') &&
         (item.title.toLowerCase().includes(query) ||
-         item.description.toLowerCase().includes(query))
+          item.description.toLowerCase().includes(query))
       )
       .sort((a, b) => {
         // Sort discounted items first
@@ -92,7 +92,7 @@ const Index = () => {
   return (
     <div className="min-h-screen pb-24">
       <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      
+
       <main className="px-1 sm:px-4 pt-8 pb-6">
         {/* Tab Header */}
         <div className="flex items-center justify-between mb-6">
@@ -105,19 +105,55 @@ const Index = () => {
         </div>
 
         {/* All Items Grid */}
-        <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {filteredItems.map((item, index) => (
-            <div
-              key={item.id}
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <ItemCard
-                item={item}
-                type={item.type}
-                onClick={() => navigate(`/order/${item.id}`)}
-              />
+        <div className="space-y-8">
+          {activeTab === 'coins' && filteredItems.some(item => item.discount) && (
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-6 bg-primary rounded-full" />
+                <h3 className="font-display text-lg font-bold text-foreground">
+                  {t('index.discountedCoins', 'Discounted Coins')}
+                </h3>
+              </div>
+              <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {filteredItems.filter(item => item.discount).map((item, index) => (
+                  <div key={item.id} style={{ animationDelay: `${index * 50}ms` }}>
+                    <ItemCard
+                      item={item}
+                      type={item.type}
+                      onClick={() => navigate(`/order/${item.id}`)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section>
+            {activeTab === 'coins' && filteredItems.some(item => item.discount) && (
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-6 bg-muted rounded-full" />
+                <h3 className="font-display text-lg font-bold text-foreground">
+                  {t('index.allCoins', 'Regular Packages')}
+                </h3>
+              </div>
+            )}
+            <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {filteredItems
+                .filter(item => activeTab === 'coins' ? (filteredItems.some(i => i.discount) ? !item.discount : true) : true)
+                .map((item, index) => (
+                  <div
+                    key={item.id}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <ItemCard
+                      item={item}
+                      type={item.type}
+                      onClick={() => navigate(`/order/${item.id}`)}
+                    />
+                  </div>
+                ))}
             </div>
-          ))}
+          </section>
         </div>
 
         {filteredItems.length === 0 && (

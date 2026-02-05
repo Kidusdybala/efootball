@@ -10,6 +10,7 @@ export interface CoinPackage {
   discount?: boolean;
   discountPercentage?: number;
   discountDays?: number;
+  discountEndDate?: string;
 }
 
 export interface Account {
@@ -99,6 +100,7 @@ export interface Listing {
   discount?: boolean;
   discountPercentage?: number;
   discountDays?: number;
+  discountEndDate?: string;
   createdAt?: string;
 }
 
