@@ -47,18 +47,6 @@ const seedListings = async () => {
     },
     {
       type: 'coin',
-      title: '550 Coins',
-      description: '550 eFootball Coins',
-      price: 889,
-      amount: 550,
-      images: ['/coins/discount.png'],
-      discount: true,
-      discountPercentage: 20,
-      discountDays: 15,
-      discountEndDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-    },
-    {
-      type: 'coin',
       title: '750 Coins',
       description: '750 eFootball Coins',
       price: 1299,
