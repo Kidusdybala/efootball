@@ -32,11 +32,14 @@ export default function AdminDashboard() {
   const [adminData, setAdminData] = useState({ name: '', username: '' });
   const [listingMap, setListingMap] = useState(new Map());
 
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
+
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       navigate('/admin');
     }
+    setIsAuthChecking(false);
 
     // Load admin data from localStorage
     const storedAdmin = localStorage.getItem('admin_data');
@@ -92,8 +95,8 @@ export default function AdminDashboard() {
   const handleTabChange = (tab: AdminTab) => {
     setActiveTab(tab);
     const path = tab === 'dashboard' ? '/admin/dashboard' :
-                 tab === 'coins' ? '/admin/dashboard/coins' :
-                 '/admin/dashboard/accounts';
+      tab === 'coins' ? '/admin/dashboard/coins' :
+        '/admin/dashboard/accounts';
     navigate(path);
   };
 
@@ -329,6 +332,8 @@ export default function AdminDashboard() {
     }
   };
 
+  if (isAuthChecking) return null;
+
   return (
     <div className="min-h-screen pb-20 md:pb-0">
       <AdminHeader onLogout={handleLogout} onProfileClick={handleProfileClick} />
@@ -360,7 +365,7 @@ export default function AdminDashboard() {
         {activeTab === 'dashboard' && (
           <div className="space-y-3 lg:space-y-4">
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-1">Dashboard</h2>
-            
+
             <DashboardStats stats={stats} />
 
             <div className="glass-card p-3 sm:p-4">
@@ -393,7 +398,7 @@ export default function AdminDashboard() {
                   </tbody>
                 </table>
               </div>
-              
+
               <div className="space-y-3 md:hidden">
                 {orders.slice(0, 5).map(order => (
                   <div key={order._id} className="border border-border/50 rounded-lg p-3">

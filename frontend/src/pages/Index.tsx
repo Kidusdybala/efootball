@@ -32,11 +32,6 @@ const Index = () => {
     }
   }, [isLoggedIn, isLoading, navigate]);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     const fetchListings = async () => {

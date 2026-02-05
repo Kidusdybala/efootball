@@ -20,15 +20,19 @@ import { Order } from '@/types';
 export default function UserDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, logout } = useAuth();
+  const { user, logout, isLoggedIn, isLoading } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
   const [uploadingOrderId, setUploadingOrderId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!user) {
+    if (!isLoading && !isLoggedIn) {
       navigate('/login');
       return;
     }
+  }, [isLoggedIn, isLoading, navigate]);
+
+  useEffect(() => {
+    if (!user) return;
 
     // Fetch orders from backend
     const fetchOrders = async () => {
@@ -129,7 +133,15 @@ export default function UserDashboard() {
     reader.readAsDataURL(file);
   };
 
-  if (!user) return null;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!isLoggedIn || !user) return null;
 
   return (
     <div className="min-h-screen pb-20 md:pb-0">
