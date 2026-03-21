@@ -69,7 +69,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
         </div>
       )}
 
-      <div className="h-16 w-full relative mb-1 sm:mb-3 rounded-lg overflow-hidden group">
+      <div className="h-16 w-full relative mb-1 sm:mb-3 rounded-lg overflow-hidden group bg-black/20">
         <img
           src={item.images[0]}
           alt={item.title}
