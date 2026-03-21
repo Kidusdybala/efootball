@@ -132,6 +132,37 @@ const Index = () => {
             </section>
           )}
 
+          {/* Japan Region Section */}
+          {activeTab === 'coins' && listings.some((item) => 'region' in item && (item as any).region === 'japan') && (
+            <section className="animate-slide-up mt-8">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-8 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
+                  <div>
+                    <h3 className="font-display text-xl font-black text-foreground flex items-center gap-2 tracking-tight">
+                      Japan Region �JPN
+                      <span className="text-2xl">🇯🇵</span>
+                    </h3>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-widest">
+                      Japan Server Exclusive
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid gap-2 sm:gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {listings.filter((item) => 'region' in item && (item as any).region === 'japan').map((item, index) => (
+                  <div key={item.id} style={{ animationDelay: `${index * 50}ms` }}>
+                    <ItemCard
+                      item={item}
+                      type={item.type}
+                      onClick={() => navigate(`/order/${item.id}`)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {activeTab === 'coins' && filteredItems.some(item => item.discount) && (
             <section className="animate-slide-up">
               <div className="flex items-center justify-between mb-4">

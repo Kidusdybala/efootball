@@ -191,11 +191,30 @@ const seedListings = async () => {
     // Japan Region
     {
       type: 'coin',
-      title: ' 2700 Coins (Japan Region)',
+      title: '🇯🇵 840 Coins (Japan)',
+      description: '840 eFootball Coins - Japan Region',
+      price: 950,
+      amount: 840,
+      images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
+      region: 'japan',
+    },
+    {
+      type: 'coin',
+      title: '🇯🇵 260 Coins (Japan)',
+      description: '260 eFootball Coins - Japan Region',
+      price: 350,
+      amount: 260,
+      images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
+      region: 'japan',
+    },
+    {
+      type: 'coin',
+      title: '🇯🇵 2700 Coins (Japan)',
       description: '2700 eFootball Coins - Japan Region Special',
-      price: 2700,
+      price: 2900,
       amount: 2700,
       images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
+      region: 'japan',
     },
     // Accounts
     {
