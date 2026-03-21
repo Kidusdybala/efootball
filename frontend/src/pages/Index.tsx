@@ -109,7 +109,7 @@ const Index = () => {
                   <div className="w-1.5 h-8 bg-yellow-500 rounded-full shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
                   <div>
                     <h3 className="font-display text-xl font-black text-foreground flex items-center gap-2 tracking-tight">
-                      Special Cons with Manager
+                      Special Coins with Manager
                     </h3>
                     <p className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-widest">
                       Exclusive Player Packs
