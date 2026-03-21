@@ -24,10 +24,30 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
     <button
       onClick={onClick}
       className={cn(
-        "glass-card glow-border p-4 text-left transition-all duration-300 hover:scale-[1.02] animate-scale-in overflow-hidden h-40 sm:h-48 w-full",
+        "glass-card glow-border p-4 text-left transition-all duration-300 hover:scale-[1.02] animate-scale-in overflow-visible h-40 sm:h-48 w-full",
         item.featured && "ring-1 ring-secondary/50"
       )}
     >
+      {/* Player Image in Top Right Corner of Card - Outside the image area */}
+      {(item as CoinPackage).playerImage && (
+        <div className="absolute -top-2 -right-2 w-14 h-16 sm:w-16 sm:h-20 overflow-hidden shadow-2xl z-20" style={{ borderRadius: '16px 16px 24px 24px' }}>
+          <img
+            src={(item as CoinPackage).playerImage}
+            alt="Player"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      {/* Region Image (e.g., Japan Flag) in Top Left Corner of Card */}
+      {(item as CoinPackage).regionImage && (
+        <div className="absolute -top-1 -left-1 w-8 h-6 sm:w-10 sm:h-7 overflow-hidden shadow-xl z-20" style={{ borderRadius: '4px 4px 8px 8px' }}>
+          <img
+            src={(item as CoinPackage).regionImage}
+            alt="Region"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
       {item.discount && (
         <div className="absolute top-2 right-2 z-20 flex flex-col items-end gap-1.5 pointer-events-none">
           {type === 'coin' && (item as CoinPackage).discountPercentage && (
@@ -73,16 +93,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           alt={item.title}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
-        {/* Player Image in Top Right Corner - Curvy Rectangle */}
-        {(item as CoinPackage).playerImage && (
-          <div className="absolute -top-1 -right-1 w-12 h-14 sm:w-14 sm:h-16 overflow-hidden shadow-xl z-10" style={{ borderRadius: '12px 12px 20px 20px' }}>
-            <img
-              src={(item as CoinPackage).playerImage}
-              alt="Player"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
+
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-60" />
 
         {type === 'team' && (

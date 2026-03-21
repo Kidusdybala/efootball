@@ -8,6 +8,7 @@ const listingSchema = new mongoose.Schema({
   images: [{ type: String }], // URLs or paths to images
   playerImage: { type: String }, // Player/manager image for special packs
   region: { type: String }, // Region (e.g., 'japan')
+  regionImage: { type: String }, // Region flag/image
   amount: { type: Number }, // for coins
   level: { type: Number }, // for accounts
   rating: { type: Number }, // for accounts and teams

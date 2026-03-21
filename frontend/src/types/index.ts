@@ -8,6 +8,7 @@ export interface CoinPackage {
   images: string[];
   playerImage?: string;
   region?: string;
+  regionImage?: string;
   featured?: boolean;
   discount?: boolean;
   discountPercentage?: number;
@@ -94,6 +95,7 @@ export interface Listing {
   images: string[];
   playerImage?: string;
   region?: string;
+  regionImage?: string;
   amount?: number;
   level?: number;
   rating?: number;

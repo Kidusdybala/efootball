@@ -140,7 +140,7 @@ const Index = () => {
                   <div className="w-1.5 h-8 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
                   <div>
                     <h3 className="font-display text-xl font-black text-foreground flex items-center gap-2 tracking-tight">
-                      Japan Region �JPN
+                      Japan Region
                       <span className="text-2xl">🇯🇵</span>
                     </h3>
                     <p className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-widest">
