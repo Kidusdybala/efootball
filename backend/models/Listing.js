@@ -6,6 +6,7 @@ const listingSchema = new mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   images: [{ type: String }], // URLs or paths to images
+  playerImage: { type: String }, // Player/manager image for special packs
   amount: { type: Number }, // for coins
   level: { type: Number }, // for accounts
   rating: { type: Number }, // for accounts and teams

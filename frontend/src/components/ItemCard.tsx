@@ -73,6 +73,16 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           alt={item.title}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
+        {/* Player Image in Top Right Corner */}
+        {(item as CoinPackage).playerImage && (
+          <div className="absolute top-0 right-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg">
+            <img
+              src={(item as CoinPackage).playerImage}
+              alt="Player"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-60" />
 
         {type === 'team' && (

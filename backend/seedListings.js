@@ -9,6 +9,37 @@ const seedListings = async () => {
   await Listing.deleteMany({});
 
   const listings = [
+    // Special Cons with Manager (Player Packs)
+    {
+      type: 'coin',
+      title: 'José Mourinho + 150🟡',
+      description: 'Special Manager Pack with 150 eFootball Coins',
+      price: 950,
+      amount: 150,
+      images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
+      playerImage: '/assets/morinho.jpg',
+      featured: true,
+    },
+    {
+      type: 'coin',
+      title: 'Van Nistelrooy + 100🟡',
+      description: 'Special National Team Pack with 100 eFootball Coins',
+      price: 600,
+      amount: 100,
+      images: ['/coins/d9af6ddb1dcd78d12657af728a08421f-removebg-preview.png'],
+      playerImage: '/assets/van nistrooy.png',
+      featured: true,
+    },
+    {
+      type: 'coin',
+      title: 'Mikaël Silverstre + 50🟡',
+      description: 'Special National Team Pack with 50 eFootball Coins',
+      price: 300,
+      amount: 50,
+      images: ['/coins/1e933f35ec6ededd0a0ac64294e991ee-removebg-preview.png'],
+      playerImage: '/assets/Mikaël Silverstre.png',
+      featured: true,
+    },
     // Special Manager/National Team Packs
     {
       type: 'coin',

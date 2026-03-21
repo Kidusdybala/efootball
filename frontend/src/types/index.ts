@@ -6,6 +6,7 @@ export interface CoinPackage {
   price: number;
   amount: number;
   images: string[];
+  playerImage?: string;
   featured?: boolean;
   discount?: boolean;
   discountPercentage?: number;
@@ -90,6 +91,7 @@ export interface Listing {
   description: string;
   price: number;
   images: string[];
+  playerImage?: string;
   amount?: number;
   level?: number;
   rating?: number;
