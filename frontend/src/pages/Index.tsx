@@ -110,7 +110,6 @@ const Index = () => {
                   <div>
                     <h3 className="font-display text-xl font-black text-foreground flex items-center gap-2 tracking-tight">
                       Special Cons with Manager
-                      <span className="text-2xl">👔</span>
                     </h3>
                     <p className="text-[10px] sm:text-xs text-muted-foreground font-medium uppercase tracking-widest">
                       Exclusive Player Packs

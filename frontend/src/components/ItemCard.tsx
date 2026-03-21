@@ -57,6 +57,15 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
               </span>
             </div>
           )}
+
+          {type === 'coin' && (item as CoinPackage).discountDays && (
+            <div className="countdown-tag px-1.5 py-0.5 sm:px-2 sm:py-0.5">
+              <Clock className="w-2 h-2 sm:w-3 sm:h-3" />
+              <span className="text-[8px] sm:text-[10px] font-bold">
+                {(item as CoinPackage).discountDays} Days
+              </span>
+            </div>
+          )}
         </div>
       )}
 
