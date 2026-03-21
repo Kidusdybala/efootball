@@ -57,33 +57,6 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
               </span>
             </div>
           )}
-
-          {type === 'coin' && (() => {
-            const coin = item as CoinPackage;
-            if (coin.discountEndDate) {
-              const remaining = new Date(coin.discountEndDate).getTime() - Date.now();
-              const days = Math.ceil(remaining / (1000 * 60 * 60 * 24));
-              const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-              const label = days > 1
-                ? `${days} ${t('index.days', 'Days')}`
-                : days === 1
-                  ? `1 ${t('index.day', 'Day')}`
-                  : hours > 0
-                    ? `${hours}${t('index.h', 'h')}`
-                    : t('index.closing', 'Closing');
-
-              return (
-                <div className="countdown-tag px-1.5 py-0.5 sm:px-2 sm:py-0.5">
-                  <Clock className="w-2 h-2 sm:w-3 sm:h-3" />
-                  <span className="text-[8px] sm:text-[10px] font-bold">
-                    {label}
-                  </span>
-                </div>
-              );
-            }
-            return null;
-          })()}
         </div>
       )}
 
