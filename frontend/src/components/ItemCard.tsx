@@ -73,9 +73,9 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
           alt={item.title}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
-        {/* Player Image in Top Right Corner */}
+        {/* Player Image in Top Right Corner - Curvy Rectangle */}
         {(item as CoinPackage).playerImage && (
-          <div className="absolute top-0 right-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-primary/50 shadow-lg">
+          <div className="absolute -top-1 -right-1 w-12 h-14 sm:w-14 sm:h-16 overflow-hidden shadow-xl z-10" style={{ borderRadius: '12px 12px 20px 20px' }}>
             <img
               src={(item as CoinPackage).playerImage}
               alt="Player"
