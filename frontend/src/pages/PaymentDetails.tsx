@@ -65,7 +65,7 @@ const PaymentDetailsPage = () => {
           Back
         </Button>
       </header>
-      <main className="px-4 pt-8 pb-6 max-w-md mx-auto">
+      <main className="px-4 pt-8 pb-6 max-w-4xl mx-auto">
         <div className="text-center mb-6">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
             <Check className="w-8 h-8 text-primary" />
@@ -83,13 +83,15 @@ const PaymentDetailsPage = () => {
           paymentMethods={paymentMethods}
         />
 
-        <p className="text-sm text-muted-foreground text-center mb-4">
-          Please transfer the exact amount and We will process your order once payment is confirmed.
-        </p>
+        <div className="max-w-md mx-auto">
+          <p className="text-sm text-muted-foreground text-center mb-4">
+            Please transfer the exact amount and We will process your order once payment is confirmed.
+          </p>
 
-        <Button onClick={() => navigate('/payment')} variant="outline" size="lg" className="w-full">
-          I have paid
-        </Button>
+          <Button onClick={() => navigate('/payment')} variant="outline" size="lg" className="w-full">
+            I have paid
+          </Button>
+        </div>
       </main>
     </div>
   );

@@ -13,6 +13,7 @@ const seedAdmin = async () => {
 
   const admin = new Admin({
     username: 'admin',
+    name: 'Admin User',
     password: 'admin123',
   });
 

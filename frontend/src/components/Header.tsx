@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import i18n from '../i18n';
 import heroBanner from '@/assets/header.JPG';
 import { useAuth } from '@/contexts/AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '@/lib/utils';
 
 interface HeaderProps {
   searchQuery: string;
@@ -18,6 +19,21 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
   const { t } = useTranslation();
   const { user, isLoggedIn, logout } = useAuth();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [points, setPoints] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (isLoggedIn && user?.email) {
+      fetch(`${API_BASE_URL}/api/points/user/${user.email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.user) {
+            setPoints(data.user.pointsBalance);
+          }
+        })
+        .catch(err => console.error('Failed to fetch points', err));
+    }
+  }, [isLoggedIn, user]);
+
   return (
     <header className="relative">
       {/* Hero Banner */}
@@ -70,10 +86,17 @@ export function Header({ searchQuery, onSearchChange }: HeaderProps) {
             </SelectContent>
           </Select>
           {isLoggedIn && user ? (
-            <div className="flex items-center gap-1">
-              <span className="text-white text-sm">{(user.name?.split(' ')[0] || user.email.split('@')[0]).charAt(0).toUpperCase()}</span>
-              <button onClick={() => setShowLogoutConfirm(true)} className="ml-1 p-1 hover:bg-white/20 rounded text-white">
-                <LogOut className="w-4 h-4" />
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Link to="/" className="flex items-center gap-2 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-black/50 hover:bg-black/60 border border-white/10 transition-colors duration-300">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary flex items-center justify-center">
+                  <span className="text-white text-xs sm:text-sm font-bold">{(user.name?.split(' ')[0] || user.email.split('@')[0]).charAt(0).toUpperCase()}</span>
+                </div>
+                <span className="hidden sm:inline text-xs font-semibold text-white">
+                  {points !== null ? `${points} points` : 'Rewards'}
+                </span>
+              </Link>
+              <button onClick={() => setShowLogoutConfirm(true)} className="ml-1 p-2 bg-black/50 hover:bg-black/60 rounded-lg text-white transition-colors">
+                <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           ) : (

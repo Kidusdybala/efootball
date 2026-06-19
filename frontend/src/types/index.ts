@@ -75,6 +75,36 @@ export interface User {
   email: string;
   password: string;
   name?: string;
+  pointsBalance?: number;
+  totalOrders?: number;
+  totalSpent?: number;
+  telegramId?: string;
+}
+
+export interface PointTransaction {
+  _id: string;
+  user: string | { _id: string; name: string; email: string };
+  order?: string | { _id: string; orderId: string };
+  pointsEarned: number;
+  reason: string;
+  createdAt: string;
+}
+
+export interface RewardMilestone {
+  _id: string;
+  pointsRequired: number;
+  rewardCoins: number;
+  label: string;
+  createdAt: string;
+}
+
+export interface AdminReward {
+  _id: string;
+  user: string;
+  admin: string;
+  coinsRewarded: number;
+  note?: string;
+  createdAt: string;
 }
 
 export interface PaymentMethod {

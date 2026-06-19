@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
 const User = require('../models/User');
+const TelegramUser = require('../models/TelegramUser');
 
 const router = express.Router();
 
@@ -37,12 +38,20 @@ router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already exists' });
     }
 
-    const user = new User({ name, email, password });
+    const user = new User({ name, email: normalizedEmail, password });
+
+    // Check if user already linked their email via Telegram Bot
+    const tgUser = await TelegramUser.findOne({ email: normalizedEmail });
+    if (tgUser) {
+      user.telegramId = tgUser.chatId;
+    }
+
     await user.save();
 
     res.status(201).json({ message: 'User created successfully' });
@@ -54,7 +63,7 @@ router.post('/signup', async (req, res) => {
 // User login
 router.post('/login', async (req, res) => {
   let { email, password } = req.body;
-  if (email) email = email.trim();
+  if (email) email = email.toLowerCase().trim();
   if (password) password = password.trim();
   
   console.log('User login attempt:', email, 'Password:', password);
