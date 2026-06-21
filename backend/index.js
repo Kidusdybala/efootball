@@ -67,14 +67,20 @@ if (rewardsBotToken) {
       try {
         const userId = msg.from?.id;
         if (!userId) return;
-        const member = await rewardsBot.getChatMember('@aurashop333', userId);
-        const isMember = ['creator', 'administrator', 'member', 'restricted'].includes(member.status);
-        if (!isMember) {
-          return rewardsBot.sendMessage(chatId, 'You must join our channel @aurashop333 to use this bot.\nPlease join the channel first and try again!');
+        const validStatuses = ['creator', 'administrator', 'member', 'restricted'];
+        const [member1, member2] = await Promise.all([
+          rewardsBot.getChatMember('@aurashop333', userId),
+          rewardsBot.getChatMember('@Aura_XI', userId)
+        ]);
+        const isMember1 = validStatuses.includes(member1.status);
+        const isMember2 = validStatuses.includes(member2.status);
+        
+        if (!isMember1 || !isMember2) {
+          return rewardsBot.sendMessage(chatId, 'You must join our channels @aurashop333 and @Aura_XI to use this bot.\nPlease join both channels first and try again!');
         }
       } catch (error) {
         console.error('Error checking channel membership:', error.message);
-        return rewardsBot.sendMessage(chatId, 'You must join our channel @aurashop333 to use this bot.\nPlease join the channel first and try again!');
+        return rewardsBot.sendMessage(chatId, 'You must join our channels @aurashop333 and @Aura_XI to use this bot.\nPlease join both channels first and try again!');
       }
     }
 
