@@ -63,6 +63,21 @@ if (rewardsBotToken) {
 
     if (!text) return;
 
+    if (chatId.toString() !== process.env.TELEGRAM_CHAT_ID) {
+      try {
+        const userId = msg.from?.id;
+        if (!userId) return;
+        const member = await rewardsBot.getChatMember('@aurashop333', userId);
+        const isMember = ['creator', 'administrator', 'member', 'restricted'].includes(member.status);
+        if (!isMember) {
+          return rewardsBot.sendMessage(chatId, 'You must join our channel @aurashop333 to use this bot.\nPlease join the channel first and try again!');
+        }
+      } catch (error) {
+        console.error('Error checking channel membership:', error.message);
+        return rewardsBot.sendMessage(chatId, 'You must join our channel @aurashop333 to use this bot.\nPlease join the channel first and try again!');
+      }
+    }
+
     if (text.toLowerCase() === '/leaderboard') {
       const adminChatId = process.env.TELEGRAM_CHAT_ID;
       if (chatId.toString() !== adminChatId) {
@@ -130,7 +145,8 @@ if (rewardsBotToken) {
           `*Rank:* #${rank} out of all users\n` +
           `*Total Orders:* ${user.totalOrders}\n` +
           `*Total Spent:* ${user.totalSpent.toFixed(2)} ETB\n\n` +
-          `${milestoneMessage}`;
+          `${milestoneMessage}\n\n` +
+          `JOIN OUR CHANNEL @aurashop333`;
 
         rewardsBot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
       } catch (error) {
