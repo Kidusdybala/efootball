@@ -145,12 +145,13 @@ if (rewardsBotToken) {
           milestoneMessage = `You have reached the highest milestone! VIP Rank Active!`;
         }
 
+        const safeName = user.name.replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '');
         const message = `*Your AuraShop Points*\n\n` +
-          `*Name:* ${user.name}\n` +
-          `*Points:* ${user.pointsBalance} pts\n` +
+          `*Name:* ${safeName}\n` +
+          `*Points:* ${user.pointsBalance || 0} pts\n` +
           `*Rank:* #${rank} out of all users\n` +
-          `*Total Orders:* ${user.totalOrders}\n` +
-          `*Total Spent:* ${user.totalSpent.toFixed(2)} ETB\n\n` +
+          `*Total Orders:* ${user.totalOrders || 0}\n` +
+          `*Total Spent:* ${(user.totalSpent || 0).toFixed(2)} ETB\n\n` +
           `${milestoneMessage}\n\n` +
           `JOIN OUR CHANNEL @aurashop333`;
 
