@@ -40,6 +40,26 @@ const seedListings = async () => {
       playerImage: '/assets/Mikaël Silverstre.png',
       featured: true,
     },
+    {
+      type: 'coin',
+      title: 'David Alaba + 100🟡',
+      description: 'Special National Team Pack with 100 eFootball Coins',
+      price: 600,
+      amount: 100,
+      images: ['/coins/d9af6ddb1dcd78d12657af728a08421f-removebg-preview.png'],
+      playerImage: '/assets/david alaba.jpg',
+      featured: true,
+    },
+    {
+      type: 'coin',
+      title: 'Darwin Nunez + 50🟡',
+      description: 'Special National Team Pack with 50 eFootball Coins',
+      price: 300,
+      amount: 50,
+      images: ['/coins/1e933f35ec6ededd0a0ac64294e991ee-removebg-preview.png'],
+      playerImage: '/assets/darwin nunez.jpg',
+      featured: true,
+    },
     // Special Manager/National Team Packs
     {
       type: 'coin',

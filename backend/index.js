@@ -76,11 +76,13 @@ if (rewardsBotToken) {
         const isMember2 = validStatuses.includes(member2.status);
         
         if (!isMember1 || !isMember2) {
-          return rewardsBot.sendMessage(chatId, 'You must join our channels @aurashop333 and @Aura_XI to use this bot.\nPlease join both channels first and try again!');
+          return rewardsBot.sendMessage(chatId, 'You must join our channels [AuraShop](https://t.me/aurashop333) and [AuraXI](https://t.me/Aura_XI) to use this bot.\nPlease join both channels first and try again!', { parse_mode: 'Markdown', disable_web_page_preview: true });
         }
       } catch (error) {
         console.error('Error checking channel membership:', error.message);
-        return rewardsBot.sendMessage(chatId, 'You must join our channels @aurashop333 and @Aura_XI to use this bot.\nPlease join both channels first and try again!');
+        // If getChatMember throws an error, it's usually because the bot is not an admin or rate limited.
+        // The user's actual status (e.g., 'left') doesn't throw an error, it's handled in the try block.
+        // We shouldn't falsely tell the user they haven't joined if the API fails.
       }
     }
 
@@ -153,17 +155,13 @@ if (rewardsBotToken) {
           `*Total Orders:* ${user.totalOrders || 0}\n` +
           `*Total Spent:* ${(user.totalSpent || 0).toFixed(2)} ETB\n\n` +
           `${milestoneMessage}\n\n` +
-          `JOIN OUR CHANNEL @aurashop333`;
+          `JOIN OUR CHANNELS: [AuraShop](https://t.me/aurashop333) | [AuraXI](https://t.me/Aura_XI)`;
 
-        rewardsBot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
+        rewardsBot.sendMessage(chatId, message, { parse_mode: 'Markdown', disable_web_page_preview: true });
       } catch (error) {
         console.error('Error fetching points in bot:', error);
         rewardsBot.sendMessage(chatId, '❌ Error fetching your points. Please try again later.');
       }
-    } else if (text.includes('@')) {
-      const email = text.toLowerCase().trim();
-      userStates[chatId] = { step: 'AWAITING_PASSWORD', email: email };
-      return rewardsBot.sendMessage(chatId, 'Great! Now please send your password for this account.');
     } else if (userStates[chatId] && userStates[chatId].step === 'AWAITING_PASSWORD') {
       const email = userStates[chatId].email;
       const password = text;
@@ -203,6 +201,10 @@ if (rewardsBotToken) {
         console.error('Error linking email in bot:', error);
         rewardsBot.sendMessage(chatId, '❌ Error linking your account. Please try again.');
       }
+    } else if (/^\\S+@\\S+\\.\\S+$/.test(text)) {
+      const email = text.toLowerCase().trim();
+      userStates[chatId] = { step: 'AWAITING_PASSWORD', email: email };
+      return rewardsBot.sendMessage(chatId, 'Great! Now please send your password for this account.');
     } else {
       userStates[chatId] = { step: 'AWAITING_EMAIL' };
       rewardsBot.sendMessage(chatId, 'Welcome! Send `/mypoints` to view your points, or send your registered email address first to link your account.', { parse_mode: 'Markdown' });
