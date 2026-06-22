@@ -201,7 +201,7 @@ if (rewardsBotToken) {
         console.error('Error linking email in bot:', error);
         rewardsBot.sendMessage(chatId, '❌ Error linking your account. Please try again.');
       }
-    } else if (/^\\S+@\\S+\\.\\S+$/.test(text)) {
+    } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)) {
       const email = text.toLowerCase().trim();
       userStates[chatId] = { step: 'AWAITING_PASSWORD', email: email };
       return rewardsBot.sendMessage(chatId, 'Great! Now please send your password for this account.');
