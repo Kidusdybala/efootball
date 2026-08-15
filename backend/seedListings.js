@@ -60,6 +60,16 @@ const seedListings = async () => {
       playerImage: '/assets/darwin nunez.jpg',
       featured: true,
     },
+    {
+      type: 'coin',
+      title: 'Luis Suarez + 100🟡',
+      description: 'Special National Team Pack with 100 eFootball Coins',
+      price: 600,
+      amount: 100,
+      images: ['/coins/d9af6ddb1dcd78d12657af728a08421f-removebg-preview.png'],
+      playerImage: '/assets/suarez.jpg',
+      featured: true,
+    },
     // Special Manager/National Team Packs
     {
       type: 'coin',
@@ -194,6 +204,18 @@ const seedListings = async () => {
     },
     {
       type: 'coin',
+      title: '1630 Coins (Discount)',
+      description: '1630 eFootball Coins - Special Discount',
+      price: 1850,
+      amount: 1630,
+      images: ['/coins/discount.png'],
+      discount: true,
+      discountPercentage: 10,
+      discountDays: 27,
+      discountEndDate: new Date(Date.now() + 27 * 24 * 60 * 60 * 1000),
+    },
+    {
+      type: 'coin',
       title: '2730 Coins (Discount)',
       description: '2730 eFootball Coins - Special Discount',
       price: 3200,
@@ -227,13 +249,17 @@ const seedListings = async () => {
     },
     {
       type: 'coin',
-      title: 'Japan 2700 Coins',
+      title: '2700 Coins (Discount)',
       description: '2700 eFootball Coins - Japan Region Special',
       price: 2900,
       amount: 2700,
-      images: ['/coins/a4i9p0vdi8dd1-removebg-preview.png'],
+      images: ['/coins/discount.png'],
       region: 'japan',
       regionImage: '/assets/Flag_of_Japan.svg.png',
+      discount: true,
+      discountPercentage: 10,
+      discountDays: 27,
+      discountEndDate: new Date(Date.now() + 27 * 24 * 60 * 60 * 1000),
     },
     // Accounts
     {
