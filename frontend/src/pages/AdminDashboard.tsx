@@ -93,6 +93,7 @@ export default function AdminDashboard() {
     const path = location.pathname;
     let tab: AdminTab = 'dashboard';
     if (path.endsWith('/coins')) tab = 'coins';
+    else if (path.endsWith('/japan')) tab = 'japan';
     else if (path.endsWith('/accounts')) tab = 'accounts';
     else if (path.endsWith('/orders')) tab = 'orders';
     else if (path.endsWith('/leaderboard')) tab = 'leaderboard';
