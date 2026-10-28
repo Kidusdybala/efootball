@@ -26,7 +26,7 @@ import { cn, API_BASE_URL } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { AdminHeader, DashboardStats, ListingsGrid, OrdersTable, AddListingModal, AdminProfileModal } from '@/components/admin';
 
-type AdminTab = 'dashboard' | 'coins' | 'accounts' | 'orders' | 'leaderboard' | 'milestones';
+type AdminTab = 'dashboard' | 'coins' | 'japan' | 'accounts' | 'orders' | 'leaderboard' | 'milestones';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -543,6 +543,7 @@ export default function AdminDashboard() {
   const tabs = [
     { id: 'dashboard' as AdminTab, label: 'Dashboard', icon: LayoutDashboard },
     { id: 'coins' as AdminTab, label: 'Coins', icon: Coins },
+    { id: 'japan' as AdminTab, label: 'Japan Players', icon: Coins },
     { id: 'accounts' as AdminTab, label: 'Accounts', icon: Users },
     { id: 'orders' as AdminTab, label: 'Orders', icon: ShoppingCart },
     { id: 'leaderboard' as AdminTab, label: 'Leaderboard', icon: Trophy },
@@ -661,9 +662,9 @@ export default function AdminDashboard() {
             )}
 
             {/* Coins / Accounts Grid Tab */}
-            {(activeTab === 'coins' || activeTab === 'accounts') && (
+            {(activeTab === 'coins' || activeTab === 'japan' || activeTab === 'accounts') && (
               <ListingsGrid
-                listings={listings.filter(item => item.type === (activeTab === 'coins' ? 'coin' : 'account')).filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))}
+                listings={listings.filter(item => activeTab === 'japan' ? item.type === 'coin' && item.region === 'japan' : item.type === (activeTab === 'accounts' ? 'account' : 'coin') && (activeTab !== 'coins' || item.region !== 'japan')).filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))}
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 onAddNew={handleAddNew}
@@ -1060,14 +1061,14 @@ export default function AdminDashboard() {
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
         onAdd={handleAddSubmit}
-        type={activeTab === 'coins' ? 'coin' : 'account'}
+        type={activeTab === 'japan' ? 'japan' : activeTab === 'accounts' ? 'account' : 'coin'}
       />
 
       <AddListingModal
         isOpen={!!editingItem}
         onClose={() => setEditingItem(null)}
         onAdd={handleEditSubmit}
-        type={editingItem?.type === 'coin' ? 'coin' : 'account'}
+        type={editingItem?.region === 'japan' ? 'japan' : editingItem?.type === 'coin' ? 'coin' : 'account'}
         item={editingItem}
       />
 

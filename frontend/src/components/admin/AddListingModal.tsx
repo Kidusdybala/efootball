@@ -10,7 +10,7 @@ interface AddListingModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAdd: (data: any) => void;
-  type: 'coin' | 'account';
+  type: 'coin' | 'account' | 'japan';
   item?: any;
 }
 
@@ -21,6 +21,7 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
     price: '',
     images: [] as File[],
     amount: '',
+    bonusCoins: '0',
     level: '',
     rating: '',
     coins: '',
@@ -38,6 +39,7 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
         price: item.price?.toString() || '',
         images: [],
         amount: item.amount?.toString() || '',
+        bonusCoins: item.bonusCoins?.toString() || '0',
         level: item.level?.toString() || '',
         rating: item.rating?.toString() || '',
         coins: item.coins?.toString() || '',
@@ -53,6 +55,7 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
         price: '',
         images: [],
         amount: '',
+        bonusCoins: '0',
         level: '',
         rating: '',
         coins: '',
@@ -68,7 +71,8 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
     e.preventDefault();
 
     const formDataToSend = new FormData();
-    formDataToSend.append('type', type);
+    const isJapanPlayer = type === 'japan' || item?.region === 'japan';
+    formDataToSend.append('type', type === 'account' ? 'account' : 'coin');
     formDataToSend.append('title', formData.title);
     formDataToSend.append('description', formData.description);
     formDataToSend.append('price', formData.price);
@@ -77,8 +81,12 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
       formDataToSend.append('discountPercentage', formData.discountPercentage);
       formDataToSend.append('discountDays', formData.discountDays);
     }
-    if (type === 'coin') {
+    if (type !== 'account') {
       formDataToSend.append('amount', formData.amount);
+      if (isJapanPlayer) {
+        formDataToSend.append('region', 'japan');
+        formDataToSend.append('bonusCoins', formData.bonusCoins || '0');
+      }
     } else {
       formDataToSend.append('level', formData.level);
       formDataToSend.append('rating', formData.rating);
@@ -104,6 +112,7 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
       price: '',
       images: [],
       amount: '',
+      bonusCoins: '0',
       level: '',
       rating: '',
       coins: '',
@@ -120,7 +129,7 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-background p-4 rounded-lg w-full max-w-sm max-h-[80vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-3">
-          <h3 className="text-base font-bold">{item ? 'Edit' : 'Add New'} {type === 'coin' ? 'Coin Package' : 'Account'}</h3>
+          <h3 className="text-base font-bold">{item ? 'Edit' : 'Add New'} {type === 'japan' ? 'Japan Player Pack' : type === 'coin' ? 'Coin Package' : 'Account'}</h3>
           <button onClick={onClose} className="p-1 hover:bg-muted rounded">
             <X className="w-4 h-4" />
           </button>
@@ -159,9 +168,9 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
                 className="h-8"
               />
             </div>
-            {type === 'coin' && (
+            {type !== 'account' && (
               <div>
-                <Label htmlFor="amount" className="text-sm">Amount</Label>
+                <Label htmlFor="amount" className="text-sm">{type === 'japan' ? 'Base Coins' : 'Amount'}</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -173,6 +182,37 @@ export function AddListingModal({ isOpen, onClose, onAdd, type, item }: AddListi
               </div>
             )}
           </div>
+          {type === 'japan' && (
+            <div>
+              <Label htmlFor="bonusCoins" className="text-sm">Bonus Coins</Label>
+              <Input
+                id="bonusCoins"
+                type="number"
+                min="0"
+                value={formData.bonusCoins}
+                onChange={(e) => setFormData({ ...formData, bonusCoins: e.target.value })}
+                required
+                className="h-8"
+              />
+            </div>
+          )}
+          {type === 'japan' && (
+            <div>
+              <Label htmlFor="images" className="text-sm">Player Poster</Label>
+              <input
+                id="images"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) setFormData({ ...formData, images: [file] });
+                }}
+                required={!item}
+                className="mt-1 text-xs w-full"
+              />
+              {formData.images.length > 0 && <p className="text-xs text-muted-foreground mt-1">Selected: {formData.images[0].name}</p>}
+            </div>
+          )}
           {type === 'account' && (
             <div>
               <Label htmlFor="images" className="text-sm">Images (first will be main)</Label>

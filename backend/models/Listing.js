@@ -10,6 +10,7 @@ const listingSchema = new mongoose.Schema({
   region: { type: String }, // Region (e.g., 'japan')
   regionImage: { type: String }, // Region flag/image
   amount: { type: Number }, // for coins
+  bonusCoins: { type: Number, default: 0 }, // bonus coins for special Japan player packs
   level: { type: Number }, // for accounts
   rating: { type: Number }, // for accounts and teams
   formation: { type: String }, // for teams

@@ -55,7 +55,7 @@ const creditPointsForOrder = async (orderId, order) => {
 
   // Rule 2: Every 100 coins bought = 10 points
   if (listing && listing.type === 'coin' && listing.amount) {
-    const totalCoinsBought = listing.amount * order.amount;
+    const totalCoinsBought = (listing.amount + (listing.bonusCoins || 0)) * order.amount;
     const coinPoints = Math.floor(totalCoinsBought / 100) * 10;
     if (coinPoints > 0) {
       totalPointsEarned += coinPoints;

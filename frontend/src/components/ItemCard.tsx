@@ -91,7 +91,9 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
       </h3>
 
       <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-1 sm:line-clamp-2 mb-0.5">
-        {item.description}
+        {((item as CoinPackage).region === 'japan' && (item as CoinPackage).amount)
+          ? `${formatNumber((item as CoinPackage).amount)} eFootball Coins${(item as CoinPackage).bonusCoins ? ` + ${formatNumber((item as CoinPackage).bonusCoins)} bonus coins` : ''}`
+          : item.description}
       </p>
 
       <div className="flex items-center justify-between">

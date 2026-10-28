@@ -5,6 +5,7 @@ export interface CoinPackage {
   description: string;
   price: number;
   amount: number;
+  bonusCoins?: number;
   images: string[];
   playerImage?: string;
   region?: string;
@@ -127,6 +128,7 @@ export interface Listing {
   region?: string;
   regionImage?: string;
   amount?: number;
+  bonusCoins?: number;
   level?: number;
   rating?: number;
   formation?: string;
