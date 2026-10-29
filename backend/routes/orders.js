@@ -1,5 +1,6 @@
 const express = require('express');
 const Order = require('../models/Order');
+const Listing = require('../models/Listing');
 const TelegramUser = require('../models/TelegramUser');
 const User = require('../models/User');
 const PointTransaction = require('../models/PointTransaction');
@@ -182,8 +183,13 @@ router.get('/', verifyToken, async (req, res) => {
 
 // Create a new order (for users, but since no user auth, maybe public or handle differently)
 router.post('/', async (req, res) => {
-  const order = new Order(req.body);
   try {
+    const listing = await Listing.findById(req.body.item);
+    if (listing?.type === 'coin' && listing.region === 'japan' && listing.price <= 0) {
+      return res.status(400).json({ message: 'This Japan coin package is not available until its price is set.' });
+    }
+
+    const order = new Order(req.body);
     const newOrder = await order.save();
     res.status(201).json(newOrder);
   } catch (err) {

@@ -25,7 +25,7 @@ async function seedJapanListings() {
       amount: { $in: japanPackages.map(({ amount }) => amount) },
     }).select('title amount price').sort({ amount: 1 }).lean();
     console.log(`Japan packages synced. Added: ${result.upsertedCount}; updated: ${result.modifiedCount}; matched: ${result.matchedCount}.`);
-    console.log(synced.map(({ amount, price }) => `${amount} coins: ${price} Birr`).join('\n'));
+    console.log(synced.map(({ amount, price }) => `${amount.toLocaleString('en-US')} coins: ${price > 0 ? `${price} Birr` : 'price pending admin setup'}`).join('\n'));
   } catch (error) {
     console.error('Failed to sync Japan packages:', error.message);
     process.exitCode = 1;

@@ -12,21 +12,17 @@ interface ItemCardProps {
 
 export function ItemCard({ item, type, onClick }: ItemCardProps) {
   const { t } = useTranslation();
-
-  const formatNumber = (num: number | undefined) => {
-    if (!num) return '0';
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(0)}K`;
-    return num.toString();
-  };
+  const isPricePending = (item as CoinPackage).region === 'japan' && item.price <= 0;
 
   return (
     <button
       onClick={onClick}
       className={cn(
         "glass-card glow-border p-4 text-left transition-all duration-300 hover:scale-[1.02] animate-scale-in overflow-visible h-40 sm:h-48 w-full",
-        item.featured && "ring-1 ring-secondary/50"
+        item.featured && "ring-1 ring-secondary/50",
+        isPricePending && "cursor-not-allowed opacity-75"
       )}
+      disabled={isPricePending}
     >
       {/* Player Image in Top Right Corner of Card - Outside the image area */}
       {(item as CoinPackage).playerImage && (
@@ -92,13 +88,15 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
 
       <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-1 sm:line-clamp-2 mb-0.5">
         {((item as CoinPackage).region === 'japan' && (item as CoinPackage).amount)
-          ? `${formatNumber((item as CoinPackage).amount)} eFootball Coins${(item as CoinPackage).bonusCoins ? ` + ${formatNumber((item as CoinPackage).bonusCoins)} bonus coins` : ''}`
+          ? `${(item as CoinPackage).amount.toLocaleString('en-US')} eFootball Coins${(item as CoinPackage).bonusCoins ? ` + ${(item as CoinPackage).bonusCoins.toLocaleString('en-US')} bonus coins` : ''}`
           : item.description}
       </p>
 
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
-          {item.discount && type === 'coin' && (item as CoinPackage).discountPercentage ? (
+          {isPricePending ? (
+            <span className="font-display text-[10px] sm:text-sm font-bold text-muted-foreground">Price coming soon</span>
+          ) : item.discount && type === 'coin' && (item as CoinPackage).discountPercentage ? (
             <>
               <span className="text-[8px] sm:text-xs text-muted-foreground line-through">
                 {(item.price / (1 - (item as CoinPackage).discountPercentage / 100)).toFixed(2)}
