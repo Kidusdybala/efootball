@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import discountImage from '@/assets/discount.png';
 import { useTranslation } from 'react-i18next';
 
+const DEFAULT_COIN_IMAGE = '/coins/d9af6ddb1dcd78d12657af728a08421f-removebg-preview.png';
+
 interface ItemCardProps {
   item: CoinPackage | Account | Team;
   type: 'coin' | 'account' | 'team';
@@ -67,9 +69,14 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
 
       <div className="h-16 w-full relative mb-1 sm:mb-3 rounded-lg overflow-hidden group bg-black/20">
         <img
-          src={item.images[0]}
+          src={item.images?.[0] || (type === 'coin' ? DEFAULT_COIN_IMAGE : '/placeholder.svg')}
           alt={item.title}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+          onError={(event) => {
+            const image = event.currentTarget;
+            const fallback = type === 'coin' ? DEFAULT_COIN_IMAGE : '/placeholder.svg';
+            if (image.src !== new URL(fallback, window.location.href).href) image.src = fallback;
+          }}
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-60" />

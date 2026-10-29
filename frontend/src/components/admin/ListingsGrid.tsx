@@ -44,7 +44,7 @@ export function ListingsGrid({ listings, searchQuery, onSearchChange, onAddNew, 
           <div key={item._id} className="glass-card p-4">
             <div className="flex gap-4">
               <img
-                src={item.images[0] || '/placeholder.svg'}
+                src={item.images?.[0] || '/placeholder.svg'}
                 alt={item.title}
                 className="w-20 h-20 rounded-lg object-cover"
               />
