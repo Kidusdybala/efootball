@@ -15,6 +15,10 @@ interface ItemCardProps {
 export function ItemCard({ item, type, onClick }: ItemCardProps) {
   const { t } = useTranslation();
   const isPricePending = (item as CoinPackage).region === 'japan' && item.price <= 0;
+  const itemImage = item.images?.[0];
+  const cardImage = type === 'coin' && (!itemImage || itemImage.includes('placeholder.svg'))
+    ? DEFAULT_COIN_IMAGE
+    : itemImage || '/placeholder.svg';
 
   return (
     <button
@@ -69,7 +73,7 @@ export function ItemCard({ item, type, onClick }: ItemCardProps) {
 
       <div className="h-16 w-full relative mb-1 sm:mb-3 rounded-lg overflow-hidden group bg-black/20">
         <img
-          src={item.images?.[0] || (type === 'coin' ? DEFAULT_COIN_IMAGE : '/placeholder.svg')}
+          src={cardImage}
           alt={item.title}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
           onError={(event) => {
