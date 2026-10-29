@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Listing = require('./models/Listing');
+const japanPackages = require('./japanPackages');
 require('dotenv').config();
 
 const seedListings = async () => {
@@ -226,7 +227,8 @@ const seedListings = async () => {
       discountDays: 27,
       discountEndDate: new Date(Date.now() + 27 * 24 * 60 * 60 * 1000),
     },
-    // Japan Region
+    // Japan Region packages
+    ...japanPackages,
     {
       type: 'coin',
       title: 'Japan 840 Coins',
